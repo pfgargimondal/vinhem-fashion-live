@@ -13,7 +13,7 @@ import { useWishlist } from "../../context/WishlistContext";
 import { useCart } from "../../context/CartContext";
 
 // ✅ NEW: PayPal button component
-import RazorpayButton from "../../components/PaymentGateway/RazorpayButton ";
+import RazorpayButton from "../../components/PaymentGateway/RazorpayButton";
 import PayPalButton from "../../components/PaymentGateway/PayPalButton";
 
 
@@ -241,7 +241,7 @@ export const Checkout = () => {
         "/user/placed-order",
         {
           billing,
-          shipping: onChecked ? shipping : "",
+          shipping: onChecked ? shipping : billing,
           payment_method: finalPaymentMethod,
           country: selectedCurrency.country_name,
           coupon_code: couponApplied ? selectedCoupon : null,
@@ -653,8 +653,8 @@ export const Checkout = () => {
                           id="example-sader"
                           type="radio"
                           name="payment_method"
-                          value="net_banking"
-                          checked={paymentMethod === "net_banking"}
+                          value="razorpay"
+                          checked={paymentMethod === "razorpay"}
                           onChange={(e) => setPaymentMethod(e.target.value)}
                         />
 
@@ -1022,6 +1022,7 @@ export const Checkout = () => {
                     )}
 
                     {paymentMethod === "razorpay" && (
+                      <div className="my-3">
                         <RazorpayButton
                             amount={(Number(totalPrice.total_selling_price) +
                                     Number(totalPrice.total_add_on_charges) +
@@ -1029,17 +1030,19 @@ export const Checkout = () => {
                             token={token}
                             onSuccess={(paymentId) => handlePlaceOrder("razorpay", paymentId)}
                         />
+                      </div>
                     )}
 
                     {/* Hide Place Order button for PayPal (optional) */}
-                    {paymentMethod !== "pay_pal" &&
-                      paymentMethod !== "razorpay" && (
-                          <button
-                              className="btn btn-main w-100 mb-3"
-                              onClick={handlePlaceOrder}
-                          >
-                              Place Order
-                          </button>
+                    {paymentMethod === "cash_on_delivery" && (
+                      <div className="my-3">
+                        <button
+                            className="btn btn-main w-100 mb-3"
+                            onClick={() => handlePlaceOrder("cash_on_delivery")}
+                        >
+                            Place Order
+                        </button>
+                      </div>
                     )}
                 </>
                 )}

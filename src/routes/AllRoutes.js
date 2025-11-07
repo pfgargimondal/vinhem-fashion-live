@@ -35,6 +35,8 @@ export const AllRoutes = () => {
 
       <Route path="blog" element={ <Blog /> } />
       <Route path="blog/:slug" element={ <BlogDetails /> } />
+      <Route path="blog/category/:blog_category" element={ <Blog /> } />
+      <Route path="blog/tag/:blog_tag" element={ <Blog /> } />
 
       <Route element={<ProtectedRoute />}>
           <Route path="profile" element={ <Profile /> } />
