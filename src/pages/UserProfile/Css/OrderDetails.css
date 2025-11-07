@@ -1,0 +1,101 @@
+
+.order-details .heading {
+  margin: 20px 200px;
+}
+.order-details .first-button {
+  background-color: rgb(211, 210, 210);
+  border-radius: 10px;
+  padding: 5px 20px;
+  border: none;
+}
+.order-details .first-button span {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-right: 10px;
+}
+.order-details .second-button {
+  background-color: black;
+  border-radius: 10px;
+  padding: 5px 20px;
+  border: none;
+  color: white;
+}
+.order-details .second-button i {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-right: 10px;
+}
+.order-details h5 {
+  font-weight: 600;
+}
+.order-details p {
+  margin-bottom: 0.4rem;
+  color: #555;
+}
+.order-details table th {
+  font-weight: 600;
+  color: #222;
+}
+.order-details table td {
+  vertical-align: middle;
+  font-size: 0.9rem;
+  color: #333;
+}
+.order-details table img {
+  width: 60px;
+  height: 80px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.order-details .text-end {
+  border-top: 1px solid #f4f2f2;
+  padding: 10px 20px;
+  background-color: #fafafa;
+  width: 350px;
+  float: right;
+}
+.order-details .text-end p span {
+  margin-left: 200px;
+}
+
+@media (max-width: 1200px) {
+  .order-details .heading {
+    margin: 15px 40px;
+  }
+  .order-details table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .order-details .first-button,
+  .order-details .second-button {
+    padding: 8px 16px;
+    font-size: 0.95rem;
+  }
+}
+@media (max-width: 576px) {
+  .order-details .heading {
+    margin: 10px 20px;
+    text-align: center;
+  }
+  .order-details img {
+    width: 45px;
+    height: 60px;
+  }
+  .order-details .first-button,
+  .order-details .second-button {
+    width: 100%;
+    margin: 5px 0;
+    justify-content: center;
+  }
+  .order-details .text-end {
+    text-align: center;
+  }
+  .order-details .text-end p {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .order-details .text-end p span {
+    margin-left: 0 !important;
+  }
+}/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,290 @@
+.filter-wrapper .breadcrumb ul li {
+  display: inline-block;
+  font-size: 0.9rem;
+}
+.filter-wrapper .breadcrumb ul li a {
+  color: var(--text-gray-color);
+}
+.filter-wrapper .alosjdjkhrjfse h4 {
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+.filter-wrapper .alosjdjkhrjfse h4 span {
+  color: var(--text-gray-color);
+  font-weight: 400;
+  font-size: 1rem;
+}
+.filter-wrapper .breadcrumb ul li:last-child a{
+  color: var(--light-black-text-color);
+}
+.oidenjwihrwer h6{
+  font-weight: 500;
+  transition: 0.2s ease-in-out;
+  font-size: 0.9rem;
+}
+.oidenjwihrwer h6:hover{
+  color: var(--black-background-color);
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+.filter-wrapper .dkewjriwehrnjhweijrwer .disenihrenjr {
+  border-bottom: 1px solid var(--text-gray-color);
+}
+.filter-wrapper .dkewjriwehrnjhweijrwer .disenihrenjr h5 {
+  font-size: 1.1rem;
+}
+.filter-wrapper .filtered-products .advtsmnt-bnnr {
+  border-radius: 0.8rem;
+}
+.filter-wrapper .filtered-products .iduhweihriweurwerwer h5.view-list {
+  text-transform: uppercase;
+}
+
+.iduhweihriweurwerwer .btn-main{
+  background: #fff !important;
+  color: var(--black-background-color) !important;
+  border: 1px solid var(--light-background-color) !important;
+  font-weight: 400;
+}
+
+.iduhweihriweurwerwer .btn-main:hover{
+  font-weight: 400;
+  border-radius: 5px;
+}
+
+.doiewjkrniuwewer.col-lg-3{
+  height: 220px;
+}
+
+.doiewjkrniuwewer.col-lg-3 .doikwenirnwekhrwer,
+.doiewjkrniuwewer.col-lg-3 .dbgdfhgv{
+  display: none !important;
+}
+
+.fdbdfgdfgdf.col-lg-9 .dbgdfhgv{
+  z-index: initial;
+  position: initial;
+  bottom: initial;
+  left: initial;
+  width: initial;
+  opacity: initial;
+  visibility: initial;
+  transition: 0.2s ease-in-out;
+  transform: initial;
+  margin-top: initial;
+}
+
+.fdbdfgdfgdf.col-lg-9 .doikwenirnwekhrwer{
+  z-index: initial;
+  align-items: initial;
+  visibility: initial;
+  opacity: initial;
+  transition: 0.2s ease-in-out;
+}
+
+.fdbdfgdfgdf.col-lg-9{
+  text-align: left;
+}
+
+/* .iduhweihriweurwerwer .btn-main:hover{
+  background: var(--black-background-color) !important;
+  color: #fff !important;
+} */
+
+.iduhweihriweurwerwer .btn-main i{
+  font-size: 1.1rem;
+  color: var(--pink-main-color);
+  transition: 0.2s ease-in-out;
+}
+
+.doewjkrnhweiurwer {
+  max-height: 14rem;
+  overflow-y: auto;
+}
+.clor-fltr-optn{
+  display: inline-block;
+}
+.doewjkrnhweiurwer .radio-wrapper-5 {
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+}
+.doewjkrnhweiurwer .radio-wrapper-5 label.forCircle {
+  align-items: center;
+  border: 0 solid #eee;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  padding: 0.2rem 0.75rem;
+  position: relative;
+  scrollbar-width: thin !important;
+}
+.doewjkrnhweiurwer .radio-wrapper-5 input[type=radio] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid #b0bec5;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  color: rgb(33, 33, 33);
+  cursor: pointer;
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-size: 100%;
+  font-variation-settings: inherit;
+  font-weight: inherit;
+  height: 1.25rem;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  scrollbar-width: thin !important;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 1.25rem;
+}
+.doewjkrnhweiurwer .radio-wrapper-5 input[type=radio]:before {
+  background-color: rgb(96, 125, 139);
+  border: 0 solid #eee;
+  border-radius: 9999px;
+  box-sizing: border-box;
+  content: "";
+  display: block;
+  height: 3rem;
+  left: 50%;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 3rem;
+}
+.doewjkrnhweiurwer .radio-wrapper-5 input[type=radio]:placeholder {
+  color: #bdbdbd;
+  opacity: 1;
+}
+.doewjkrnhweiurwer .radio-wrapper-5 input[type=radio]:checked:before {
+  background-color: rgb(33, 33, 33);
+}
+.doewjkrnhweiurwer .radio-wrapper-5 input[type=radio]:hover:not(:disabled):before {
+  opacity: 0.1;
+}
+.doewjkrnhweiurwer .radio-wrapper-5 label.forCircle span {
+  border: 0 solid #eee;
+  box-sizing: border-box;
+  color: rgb(33, 33, 33);
+  left: 50%;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  scrollbar-width: thin !important;
+  top: 50%;
+  transform: matrix(1, 0, 0, 1, -7, -7);
+  transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.doewjkrnhweiurwer .radio-wrapper-5 input[type=radio]:checked ~ span {
+  opacity: 1;
+}
+.doewjkrnhweiurwer .radio-wrapper-5 svg {
+  display: block;
+  height: 0.875rem;
+  vertical-align: middle;
+  width: 0.875rem;
+}
+.doewjkrnhweiurwer .radio-wrapper-5 label {
+  color: var(--text-main-color);
+  cursor: pointer;
+  margin-top: 1px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.osdmcfosjrserr label {
+  margin: 10px;
+  display: block;
+  vertical-align: middle;
+  line-height: 25px;
+  cursor: pointer;
+}
+.osdmcfosjrserr input[type=radio] {
+  vertical-align: bottom;
+  -webkit-appearance: none;
+  width: 1.25rem;
+  cursor: pointer;
+  height: 1.25rem;
+  border: 1px solid darkgray;
+  border-radius: 50%;
+  outline: none;
+  margin: 0.1rem 0.75rem 0.1rem 0;
+}
+.osdmcfosjrserr input[type=radio]:before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.view-options div i {
+  font-size: 1.6rem;
+  cursor: pointer;
+  display: flex;
+  padding: 0.4rem 0.4rem;
+  border: 1px solid #fff;  
+}
+
+.view-options .grid-view,
+.view-options .list-view {
+  border-radius: 0.375rem;
+  border: 1px solid #fff;
+}
+
+.view-options .grid-view.active,
+.view-options .list-view.active {
+  border: 1px solid var(--text-gray-color);
+}
+
+.filtr-wrppr .fdbdfgdfgdf.col-lg-12 .dlksfskjrewrwere{
+  display: none !important;
+}
+
+.oidenjwihrwer h5 i{
+  color: var(--pink-main-color);
+}
+
+.doewnkrhwer input:checked + label{
+  background: var(--black-background-color) !important;
+  color: #fff !important;
+}
+
+.doewnkrhwer input:checked + label i{
+  color: #fff !important;
+}
+
+.podwejorjwierwer .form-select{
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.doewnkrhwersdvzdfb input:checked + label{
+  background: var(--black-background-color) !important;
+  color: #fff !important;
+}
+
+
+
+.oijdmeiojewrer i{
+  cursor: pointer;
+  color: var(--text-gray-color);
+}
+
+.bdfgsdfseewewrr{
+  max-height: 14rem;
+  overflow-y: auto;
+}
+
+.bdfgsdfseewewrr .doewjkrnhweiurwer {
+    max-height: none;
+    overflow-y: initial;
+}

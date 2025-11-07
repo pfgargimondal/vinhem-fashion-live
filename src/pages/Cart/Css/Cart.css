@@ -1,0 +1,151 @@
+.cart-wrapper .diwebjrwert_left h4 {
+  font-size: 1.2rem;
+}
+.cart-wrapper .diwebjrwert_left .odnwejirhwerwer {
+  background: var(--light-background-color);
+  border-radius: 5px;
+}
+.cart-wrapper .diwebjrwert_left .odnwejirhwerwer p {
+  font-size: 0.9rem;
+}
+.cart-wrapper .diwebjrwert_left .odnwejirhwerwer p .btn-main {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+.cart-wrapper .diwebjrwert_left .dfgjhbdfg {
+  border: 1px solid var(--light-background-color);
+  border-radius: 5px;
+}
+.cart-wrapper .diwebjrwert_left .dfgjhbdfg .donweihrwewer {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  min-height: 160px;
+  overflow: hidden;
+  max-height: 160px;
+}
+.cart-wrapper .diwebjrwert_left .dfgjhbdfg .donweihrwewer img {
+  max-width: 100%;
+  max-height: 160px;
+  border-radius: 5px;
+}
+.cart-wrapper .diwebjrwert_left .dfgjhbdfg .dknwekhwe h4 {
+  font-size: 1.1rem;
+}
+.cart-wrapper .diwebjrwert_left .dfgjhbdfg .dknwekhwe h5 {
+  font-size: 1.2rem;
+}
+.cart-wrapper .diwebjrwert_left .dfgjhbdfg .dknwekhwe h5 span.old-price {
+  text-decoration: line-through;
+  color: var(--text-lighter-gray-color);
+}
+.cart-wrapper .diwebjrwert_left .dfgjhbdfg .dnweghbjewrwer p {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--grey-border-color);
+}
+.cart-wrapper .diwebjrwert_left .dfgjhbdfg .dnweghbjewrwer .copn-cde {
+  font-size: 0.8rem;
+}
+.cart-wrapper .diwebjrwert_left .dfgjhbdfg .dnweghbjewrwer h6 {
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--grey-border-color);
+}
+.cart-wrapper .diwebjrwert_left .dfgjhbdfg .dnweghbjewrwer h6 i {
+  color: var(--pink-main-color);
+}
+.cart-wrapper .diwebjrwert_left .dfgjhbdfg .dnweghbjewrwer h6 span {
+  font-weight: 600;
+  color: var(--black-background-color);
+}
+.cart-wrapper .diwebjrwert_left .dfgjhbdfg .dnweghbjewrwer .dewhrowerwer i {
+  width: 1.8rem;
+  height: 1.8rem;
+  display: inline-block;
+  border-radius: 50%;
+  background: #fff;
+  text-align: center;
+  line-height: 1.9;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+  border: 1px solid var(--text-lighter-gray-color);
+}
+.cart-wrapper .diwebjrwert_left .dfgjhbdfg .dnweghbjewrwer .dewhrowerwer i:hover {
+  background: var(--pink-main-color);
+  transition: 0.3s ease-in-out;
+  color: #fff;
+  transform: scale(1.2);
+  border-color: var(--pink-main-color);
+}
+.cart-wrapper .diwebjrwert_left .dweihriwerwerw p, .cart-wrapper .diwebjrwert_left .dweihriwerwerw ul li {
+  font-size: 0.7rem;
+}
+.cart-wrapper .diwebjrwert_left .dweihriwerwerw ul li {
+  display: inline;
+  margin-right: 1rem;
+}
+.cart-wrapper .diwebjrwert_left .dweihriwerwerw ul li a {
+  text-decoration: underline !important;
+}
+.cart-wrapper .diwebjrwert_right h4 {
+  font-size: 1.2rem;
+}
+.cart-wrapper .diwebjrwert_right .dweoihrwerwer {
+  border: 1px solid var(--light-background-color);
+  border-radius: 5px;
+}
+.cart-wrapper .diwebjrwert_right .dweoihrwerwer table {
+  margin-bottom: 0;
+}
+.cart-wrapper .diwebjrwert_right .dweoihrwerwer table tr td:last-child {
+  text-align: right;
+}
+.cart-wrapper .diwebjrwert_right .dweoihrwerwer table tr:last-child td {
+  border: none;
+}
+.cart-wrapper .diwebjrwert_right .dweoihrwerwer p {
+  font-size: 0.8rem;
+}
+.cart-wrapper .diwebjrwert_right .dweoihrwerwer .doewjirwerwer label {
+  font-size: 0.9rem;
+}
+.cart-wrapper .diwebjrwert_right .dweoihrwerwer.aiksndjhugwerwerw span {
+  font-size: 0.9rem;
+}
+.cart-wrapper .diwebjrwert_right .oiasmdjweijrwerwer .dewuihrwe .form-control {
+  border-radius: 0.375rem;
+}
+.cart-wrapper .diwebjrwert_right .oiasmdjweijrwerwer .dewuihrwe .btn-main {
+  right: 0;
+  top: 0;
+  border-radius: 0 0.375rem 0.375rem 0;
+}
+.cart-wrapper .diwebjrwert_right .oiasmdjweijrwerwer.zsdvfdesdeadfrer {
+  border-bottom: 1px solid var(--light-background-color);
+}
+.cart-wrapper .diwebjrwert_right .uiwdhiwerwerwer .btn-main:last-child {
+  background: #fff;
+  color: var(--black-background-color);
+}
+.cart-wrapper .diwebjrwert_right .uiwdhiwerwerwer .btn-main:last-child:hover {
+  background: var(--black-background-color) !important;
+  color: #fff !important;
+}
+
+.dscnt-offr {
+  top: -5%;
+  right: 3%;
+  background: var(--pink-main-color);
+  line-height: 1.2;
+  font-size: 0.8rem;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.deiwnriwehrwer input.form-control{
+  padding: 0.25rem 2.25rem 0.25rem 0.75rem !important;  
+  color: var(--bs-body-color);
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+}
