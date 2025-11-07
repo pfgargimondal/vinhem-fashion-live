@@ -98,7 +98,7 @@ export const OrderDetails = () => {
     const html = document.querySelector("html");
     html.classList.add("overflow-hidden");
 
-    setOrderMeasurementData(item?.measurement_data || {});
+    setOrderMeasurementData(item?.user_measurmentDetails || {});
     setSelectedOrderProductId(item?.product?.PID || item?.product_id);
     setOrderDetailsMessurmntModal(true);
   };
@@ -197,13 +197,14 @@ export const OrderDetails = () => {
                           </p>
                           <p className="mb-0">
                             Quantity: {item?.quantity} <br />
-                            SIze: {item?.product_size} <br />
+                            Size: {item?.product_size} <br />
                             Price: ₹{item?.total_price}
 
                             <div className="idniehrewrer d-flex align-items-center">
                               <span className="d-block me-3" onClick={() => toggleDetails(index)}>More Details <i class="fa-solid fa-caret-down"></i></span>
-
-                              <span className="mb-0" onClick={() => handleMessrmntTogle(item)}>Meassurement Chart Details</span>
+                              {item.user_measurmentDetails !== null && (
+                                <span className="mb-0" onClick={() => handleMessrmntTogle(item)}>Meassurement Chart Details</span>
+                              )}
                             </div>
                           </p>
                         </div>
@@ -284,258 +285,113 @@ export const OrderDetails = () => {
 
       <div className={`messrmnt-modal ${orderDetailsMessurmntModal ? "" : "messrmnt-modal-hide"} bg-white position-fixed`}>
         <div className="messrmnt-modal-header p-4">
-          <h5 className="mb-0">Messurement Details for Product ID: </h5>
+          <h5 className="mb-0">Messurement Details for Product ID: {selectedOrderProductId}</h5>
         </div>
 
         <div className="djeoijojrer h-100 py-3 px-4">
           <div className="row">
-            <div className="col-lg-6 mb-4">
+            <div className="col-lg-12 mb-4">
               <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
+                <label className="form-label">Measurement Name</label>
+                <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.measurment_name}/>
+              </div>
+            </div>
+            <div className="col-lg-12 mb-4">
+              <div className="diweuhrwer">
+                <label className="form-label">Measurement Fit</label>
+                <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.measurement_fit}/>
               </div>
             </div>
 
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
+            {orderMeasurementData.product_type === 'generic' && (
+                <>
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Bust</label>
 
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
+                      <input type="text" disabled className="form-control" placeholder="2" value={orderMeasurementData.generic_around_bust}/>
+                    </div>
+                  </div>
 
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Shoulder</label>
 
-                <input className="d-block" type="checkbox" checked />
-              </div>
-            </div>
+                      <input type="text" disabled className="form-control" placeholder="2" value={orderMeasurementData.generic_shoulder}/>
+                    </div>
+                  </div>
 
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
+                  {/* <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Front Neck Depth</label>
 
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
+                      <input className="d-block" type="checkbox" checked />
+                    </div>
+                  </div> */}
 
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Front Neck Depth</label>
 
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
+                      <input type="text" disabled className="form-control" placeholder="2" value={orderMeasurementData.generic_front_neck_depth}/>
+                    </div>
+                  </div>
 
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Back Neck Depth</label>
 
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
+                      <input type="text" disabled className="form-control" placeholder="2" value={orderMeasurementData.generic_back_neck_depth}/>
+                    </div>
+                  </div>
 
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Sleeve Length</label>
 
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
+                      <input type="text" disabled className="form-control" placeholder="2" value={orderMeasurementData.generic_sleeve_length}/>
+                    </div>
+                  </div>
 
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Top Length</label>
 
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
+                      <input type="text" disabled className="form-control" placeholder="2" value={orderMeasurementData.generic_top_length}/>
+                    </div>
+                  </div>
 
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Blouse Length</label>
 
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
+                      <input type="text" disabled className="form-control" placeholder="2" value={orderMeasurementData.generic_blouse_length}/>
+                    </div>
+                  </div>
 
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Height</label>
+                      <input type="text" disabled className="form-control" placeholder="2" value={orderMeasurementData.generic_height}/>
+                    </div>
+                  </div>
 
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Bottom Length</label>
+                      <input type="text" disabled className="form-control" placeholder="2" value={orderMeasurementData.generic_bottom_length}/>
+                    </div>
+                  </div>
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Waist</label>
+                      <input type="text" disabled className="form-control" placeholder="2" value={orderMeasurementData.generic_waist}/>
+                    </div>
+                  </div>
 
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
-
-            <div className="col-lg-6 mb-4">
-              <div className="diweuhrwer">
-                <label className="form-label">la la la la la la la la</label>
-
-                <input type="text" disabled className="form-control" placeholder="2" />
-              </div>
-            </div>
+                </>
+            )}
+             
           </div>
         </div>
       </div>
