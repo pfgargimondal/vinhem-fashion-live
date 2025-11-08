@@ -85,7 +85,7 @@ export const Invoice = () => {
     if (pdfView && ready) {
       previewPDF();
     }
-  }, [pdfView, ready]);
+  }, [pdfView, ready, previewPDF]);
 
   return (
     <div id="invoice-content" className="invoice-box my-5">
