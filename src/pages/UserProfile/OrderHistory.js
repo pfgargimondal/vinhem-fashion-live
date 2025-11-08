@@ -7,7 +7,7 @@ import http from "../../http";
 import { useEffect, useState } from "react";
 // eslint-disable-next-line
 import { downloadInvoicePDF } from "../../utils/downloadInvoice";
-import { Invoice } from "../Invoice/Invoice";
+import Invoice from "../Invoice/Invoice";
 import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line
 import jsPDF from "jspdf";
@@ -51,77 +51,73 @@ export const OrderHistory = () => {
     const navigate = useNavigate();
 
 
-const handleDownload = async (order) => {
-  try {
-    const res = await http.get("/user/get-invoice-details", {
-      headers: { Authorization: `Bearer ${token}` },
-      params: { id: order.order_id }, // 👈 send order_id as 'id'
-    });
 
-    const data = res.data.data || {};
-    const userInfo = data.user || null;
-    const orderProductDetails = data.user_order_product_details || null;
-    const getProductDetails = data.get_product_details || null;
-    const getGSTDetails = data.get_gst_value || null;
+    const handleDownload = async (order) => {
+        try {
+            const res = await http.get("/user/get-invoice-details", {
+            headers: { Authorization: `Bearer ${token}` },
+            params: { id: order.order_id }, // 👈 send order_id as 'id'
+            });
 
-    
+            const data = res.data.data || {};
+            const userInfo = data.user || null;
+            const orderProductDetails = data.user_order_product_details || null;
+            const getProductDetails = data.get_product_details || null;
+            const getGSTDetails = data.get_gst_value || null;
 
-    localStorage.setItem(
-      "invoiceData",
-      JSON.stringify({
-        order,
-        user: userInfo,
-        userOrderProduct: orderProductDetails,
-        getProductDetails: getProductDetails,
-        getGSTDetails: getGSTDetails,
-      })
-    );
+            
 
-   navigate("/invoice", {
-  state: {
-    order,
-    user: userInfo,
-    userOrderProduct: orderProductDetails,
-    getProductDetails: getProductDetails,
-    getGSTDetails: getGSTDetails,
-    pdfView: true, // signal PDF preview
-  },
-});
-  } catch (error) {
-    console.error("❌ Failed to fetch invoice details:", error);
-  }
-};
+            localStorage.setItem(
+            "invoiceData",
+            JSON.stringify({
+                order,
+                user: userInfo,
+                userOrderProduct: orderProductDetails,
+                getProductDetails: getProductDetails,
+                getGSTDetails: getGSTDetails,
+            })
+            );
 
-const handleCancelOrder = async (order) => {
-  const confirmCancel = window.confirm("Are you sure you want to cancel this order?");
-  if (!confirmCancel) return;
+        navigate("/invoice", {
+        state: {
+            order,
+            user: userInfo,
+            userOrderProduct: orderProductDetails,
+            getProductDetails: getProductDetails,
+            getGSTDetails: getGSTDetails,
+            pdfView: true, // signal PDF preview
+        },
+        });
+        } catch (error) {
+            console.error("❌ Failed to fetch invoice details:", error);
+        }
+    };
 
-  try {
-    const token = localStorage.getItem("token");
-    const response = await http.post(
-      `/user/cancel-order/${order.order_id}`,
-      {},
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const handleCancelOrder = async (order) => {
+    const confirmCancel = window.confirm("Are you sure you want to cancel this order?");
+    if (!confirmCancel) return;
 
-    if (response.data.success) {
-      alert("Your order has been cancelled successfully!");
-      navigate("/order-history"); 
-    } else {
-      alert(`${response.data.message || "Failed to cancel order"}`);
+    try {
+        const token = localStorage.getItem("token");
+        const response = await http.post(
+        `/user/cancel-order/${order.order_id}`,
+        {},
+        {
+            headers: { Authorization: `Bearer ${token}` },
+        }
+        );
+
+        if (response.data.success) {
+        alert("Your order has been cancelled successfully!");
+        navigate("/order-history"); 
+        } else {
+        alert(`${response.data.message || "Failed to cancel order"}`);
+        }
+    } catch (err) {
+        console.error(err);
+        alert(" Something went wrong while cancelling the order.");
     }
-  } catch (err) {
-    console.error(err);
-    alert(" Something went wrong while cancelling the order.");
-  }
-};
-
-
-
-
-
+    };
 
 
     return (

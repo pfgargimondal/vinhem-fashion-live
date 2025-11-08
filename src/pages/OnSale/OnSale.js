@@ -35,7 +35,7 @@ export const OnSale = () => {
 
   return (
     <div>
-      <div class="dfgjhdfgdf">
+      <div class="dfgjhdfgdf container-fluid">
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           spaceBetween={30}

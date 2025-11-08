@@ -1223,7 +1223,7 @@ export const ProductDetail = () => {
                         </div>
 
                         <div className="col-lg-4">
-                          <button className="btn w-100 btn-transparent">
+                          <button className="btn w-100 btn-transparent" onClick={() => (window.location.href = "tel:7003672926")}>
                             <i class="bi me-1 bi-telephone-forward"></i> Call Us
                           </button>
                         </div>
@@ -1425,10 +1425,7 @@ export const ProductDetail = () => {
                                     <p className="mb-0">
                                       Disclaimer <br />{" "}
                                       <span>
-                                        Color of the actual product may vary from
-                                        the image. These are made to order
-                                        designer styles, hence expect a slight
-                                        variation from the image displayed.
+                                        This product will be exclusively handcrafted for you, making the color, texture, and pattern slightly vary from the image shown, due to the high resolution of photography and processes involved. Accessories shown in the image are not a part of the product; they are for presentation purposes only.
                                       </span>
                                     </p>
                                   </div>
@@ -1449,25 +1446,27 @@ export const ProductDetail = () => {
 
                       <hr className="mb-4" />
 
-                      <h6>Shipping & Returns</h6>
-
                       <p className="mb-1">
-                        Product will be shipped by {getEstimatedShippingDate(
+                        Product will be shipped by, {getEstimatedShippingDate(
                                       productDetails?.data?.shipping_time
                                     )} 
                       </p>
 
                       <p className="mb-3">
                         For customizations & early delivery, chat with us on
-                        WhatsApp at <a href="/">+91 8291990059</a> or call us at 
-                        <a href="/">022-42792123</a>
+                        WhatsApp at <a href="https://wa.me/917003672926" target="_blank" rel="noopener noreferrer">+91 7003672926</a> or call us at 
+                         <a href="tel:7003672926"> 7003672926</a>
                       </p>
 
                       <p className="mb-2">Return Policy</p>
 
                       <p>
-                        This product is non-returnable.
-                        <Link to="/return-policy">More Details</Link>
+                        Returnable within 2 days of delivery (3 days for Gold members). 
+                        Custom-made orders are not returnable. Product's original tags, if attached, 
+                        must be intact for a successful return. If the original tags are missing, 
+                        VinHem Fashion may decline the return request and send the product back to the customer 
+                        & return handling charges would be applicable. For more details click on 
+                        <Link to="/return-policy"> More Details</Link>
                       </p>
                     </div>
 
@@ -1523,6 +1522,7 @@ export const ProductDetail = () => {
                                             style: "currency",
                                             currency: "INR",
                                             maximumFractionDigits: 0,
+                                            useGrouping: false, 
                                           }).format(matchingProduct.selling_price)}</h5>
                                     </div>
                                   </div>

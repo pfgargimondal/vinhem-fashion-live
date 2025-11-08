@@ -72,7 +72,7 @@
 }
 
 .njkcfnuwffsdfsf{
-  margin-top: 6rem;
+  margin-top: 4rem;
 }
 
 .njkcfnuwffsdfsf i{
@@ -81,4 +81,33 @@
 
 .btn.akdhjkashriwerwer:active{
   border-color: #fff !important;
+}
+
+.sodmfjlskpflser span{
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: red;
+  display: block;
+  position: absolute;
+  right: -0.5rem;
+  top: 0;
+  animation: pulse 2s infinite linear;
+}
+
+@keyframes pulse{
+  0% {
+      transform: scale(0.9);
+      box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+    }
+
+    70% {
+      transform: scale(1.2);
+      box-shadow: 0 0 0 8px rgba(255, 0, 0, 0);
+    }
+
+    100% {
+      transform: scale(0.9);
+      box-shadow: 0 0 0 0 rgba(255, 255, 0, 0);
+    }
 }

@@ -321,14 +321,6 @@ export const OrderDetails = () => {
                     </div>
                   </div>
 
-                  {/* <div className="col-lg-6 mb-4">
-                    <div className="diweuhrwer">
-                      <label className="form-label">Front Neck Depth</label>
-
-                      <input className="d-block" type="checkbox" checked />
-                    </div>
-                  </div> */}
-
                   <div className="col-lg-6 mb-4">
                     <div className="diweuhrwer">
                       <label className="form-label">Front Neck Depth</label>
@@ -390,6 +382,516 @@ export const OrderDetails = () => {
                   </div>
 
                 </>
+            )}
+
+            {orderMeasurementData.product_type === 'dress' && (
+              <>
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Bust</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_around_bust_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Shoulder</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_shoulder_option}/>
+                    </div>
+                  </div>
+
+                  {/* <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Front Neck Depth</label>
+
+                      <input className="d-block" type="checkbox" checked />
+                    </div>
+                  </div> */}
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Arm</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_around_arm_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Front Neck Depth</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_front_neck_depth_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Back Neck Depth</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_back_neck_depth_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Sleeve Style</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_sleeve_style_options}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Sleeve Length</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_sleeve_length_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Above Waist</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_around_above_waist_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Hip</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_around_hip_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Kurta Length</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_kurta_length_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Kurta Closing Side</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_kurta_closing_side_options}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Kurta Closing With</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_kurta_closing_with_options}/>
+                    </div>
+                  </div>
+
+
+
+
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Waist</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_around_waist_option}/>
+                    </div>
+                  </div>
+                  
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Thigh</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_around_thigh_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Knee</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_around_knee_option }/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Calf</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_around_calf_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Bottom Length</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_bottom_length_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Bottom Style</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_bottom_style_options}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Bottom Closing Side</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_bottom_closing_side_options}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Bottom Closing With</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.dress_bottom_closing_with_options}/>
+                    </div>
+                  </div>
+
+
+                  <div className="col-lg-12 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Additional customization request</label>
+                      <textarea type="text" disabled className="form-control" placeholder="" >{orderMeasurementData.additional_customize_dress}</textarea>
+                    </div>
+                  </div>
+                  
+              </>
+            )}
+
+            {orderMeasurementData.product_type === 'saree' && (
+              <>
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Bust</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_around_bust_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Above Waist</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_above_waist_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Blouse Length</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_blouse_length_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Shoulder</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_shoulder_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Sleeve Length</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_sleeve_length_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Sleeve Style</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_sleeve_style_options}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Arm</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_around_arm_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Blouse Pads</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_blouse_pads_options}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Front Neck Depth</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_front_neck_depth_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Back Neck Depth</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_back_neck_depth_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Blouse Closing Side</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_blouse_closing_side_options}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Blouse Closing With</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_blouse_closing_with_options}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">With Petticoat (Inskirt)</label>
+
+                      <input className="d-block" type="checkbox" checked={orderMeasurementData?.include_petticoat === '1'} />
+                    </div>
+                  </div>
+                  
+                  {orderMeasurementData?.include_petticoat === '1' && (
+                    <>
+                      <div className="col-lg-6 mb-4">
+                        <div className="diweuhrwer">
+                          <label className="form-label">Petticoat Waist (Inskirt)</label>
+                          <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_petticoat_waist_option}/>
+                        </div>
+                      </div>
+
+                      <div className="col-lg-6 mb-4">
+                        <div className="diweuhrwer">
+                          <label className="form-label">Petticoat Length (Inskirt)</label>
+
+                          <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_petticoat_length_option}/>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                  
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Fall & Edging Work</label>
+
+                      <input className="d-block" type="checkbox" checked={orderMeasurementData?.saree_fall_edging === '1'} /> 
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Matching Tassels</label>
+
+                      <input className="d-block" type="checkbox" checked={orderMeasurementData?.saree_matching_tassles === '1'} /> 
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Additional customization request</label>
+                      <textarea type="text" disabled className="form-control" placeholder="" >{orderMeasurementData.additional_customize_saree}</textarea>
+                    </div>
+                  </div>
+                  
+              </>
+            )}
+
+            {orderMeasurementData.product_type === 'lehenga' && (
+              <>
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Bust</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_around_bust_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Above Bust</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_above_waist_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Choli Length</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_choli_length_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Shoulder</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_shoulder_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Sleeve Length</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_sleeve_length_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Sleeve Style</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_sleeve_style_options}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Arm</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_around_arm_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Blouse Pads</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.saree_blouse_pads_options}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Front Neck Depth</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_front_neck_depth_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Back Neck Depth</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_back_neck_depth_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Choli Closing Side</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_choli_closing_side_options}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Choli Closing With</label>
+
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_choli_closing_with_options}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Waist</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_around_waist_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Around Hip</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_around_hip_option}/>
+                    </div>
+                  </div>
+
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Lehenga Length</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_length_option}/>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Lehenga Closing Side</label>
+                      <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_side_closing_options}/>
+                    </div>
+                  </div>
+
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">With Petticoat (Inskirt)</label>
+
+                      <input className="d-block" type="checkbox" checked={orderMeasurementData?.with_petticoat_lahenga === '1'} />
+                    </div>
+                  </div>
+                  
+                  {orderMeasurementData?.with_petticoat_lahenga === '1' && (
+                    <>
+                      <div className="col-lg-6 mb-4">
+                        <div className="diweuhrwer">
+                          <label className="form-label">Petticoat Waist (Inskirt)</label>
+                          <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_petticoat_waist_option}/>
+                        </div>
+                      </div>
+
+                      <div className="col-lg-6 mb-4">
+                        <div className="diweuhrwer">
+                          <label className="form-label">Petticoat Length (Inskirt)</label>
+
+                          <input type="text" disabled className="form-control" placeholder="" value={orderMeasurementData.lehenga_petticoat_length_option}/>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                  
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Fall & Edging Work</label>
+
+                      <input className="d-block" type="checkbox" checked={orderMeasurementData?.fall_edging_work_lahenga === '1'} /> 
+                    </div>
+                  </div>
+
+                  <div className="col-lg-6 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Matching Tassels</label>
+
+                      <input className="d-block" type="checkbox" checked={orderMeasurementData?.matching_tassles_lahenga === '1'} /> 
+                    </div>
+                  </div>
+
+
+
+                  <div className="col-lg-12 mb-4">
+                    <div className="diweuhrwer">
+                      <label className="form-label">Additional customization request</label>
+                      <textarea type="text" disabled className="form-control" placeholder="" >{orderMeasurementData.additional_customization_lahenga}</textarea>
+                    </div>
+                  </div>
+                  
+              </>
             )}
              
           </div>

@@ -95,8 +95,10 @@ export const UserProfileNavMenu = () => {
                     </Link>
 
                     <Link to="/chat">
-                        <button className="btn akdhjkashriwerwer">
-                            <i class="fa-regular fa-comments"></i> Chat
+                        <button className="btn d-flex align-items-center sodmfjlskpflser akdhjkashriwerwer">
+                            <i class="fa-regular me-1 fa-comments"></i>
+                            
+                            <p className="position-relative mb-0">Chat <span></span></p>
                         </button>
                     </Link>
 

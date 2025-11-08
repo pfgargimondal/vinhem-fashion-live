@@ -1,5 +1,7 @@
 export { Header } from "./Layouts/Header/Header";
+export { HeaderBlog } from "./Layouts/Header/HeaderBlog";
 export { Footer } from "./Layouts/Footer/Footer";
+export { FooterBlog } from "./Layouts/Footer/FooterBlog";
 
 export { FeaturedProducts } from "./Elements/FeaturedProducts/FeaturedProducts";
 export { DesignerSizeChart } from "./Elements/DsignerSizeChart/DsignerSizeChart";

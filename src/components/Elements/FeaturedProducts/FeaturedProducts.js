@@ -122,6 +122,7 @@ export const FeaturedProducts = ({ featuredProduct }) => {
                         style: "currency",
                         currency: "INR",
                         maximumFractionDigits: 0,
+                        useGrouping: false, 
                       }).format(featuredProduct.selling_price)}
                     </h5>
 

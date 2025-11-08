@@ -42,7 +42,7 @@ export { TrackOrder } from "./TrackOrder/TrackOrder";
 export { FAQ } from "./FAQ/FAQ";
 
 
-export { Invoice } from "./Invoice/Invoice";
+export { default as Invoice } from "./Invoice/Invoice";
 
 export { PageNotFound } from "./PageNotFound/PageNotFound";
 

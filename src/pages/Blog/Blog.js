@@ -12,6 +12,7 @@ import "swiper/css/pagination";
 import http from "../../http";
 
 import "./Css/Blog.css";
+import { FooterBlog, HeaderBlog } from "../../components";
 
 
 export const Blog = () => {
@@ -140,6 +141,8 @@ export const Blog = () => {
 
     return (
         <>
+            <HeaderBlog />
+            
             <section className="dsgbtgfewfrrr container-fluid mb-4">
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
@@ -291,6 +294,8 @@ export const Blog = () => {
                     </aside>
                 </div>
             </div>
+
+            <FooterBlog />
         </>
     )
 }

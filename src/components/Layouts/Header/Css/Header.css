@@ -70,6 +70,9 @@ header .advertisement-slider .marquee-container:hover .marquee-right {
 header .header-top {
   background: #fff;
   border-bottom: 1px solid var(--light-background-color);
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 12px 20px -20px;
+  position: relative;
+  z-index: 9;
 }
 header .header-top .doeiwhrkwdeor img{
   width: 70%;
@@ -250,6 +253,7 @@ header .header-main .swiper-slide a {
 
 header .header-main{
   border-bottom: 1px solid var(--light-background-color);
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 20px 20px -20px;
 }
 
 header .header-main .swiper-slide:hover .header-mega-menu{
