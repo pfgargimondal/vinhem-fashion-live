@@ -4,6 +4,7 @@ import { UseFormattedDate } from "../../hooks/UseFormattedDate";
 import http from "../../http";
 import "./Css/Blog.css";
 import { toast, ToastContainer } from "react-toastify";
+import { FooterBlog, HeaderBlog } from "../../components";
 
 export const BlogDetails = () => {
     const { slug } = useParams();
@@ -127,6 +128,8 @@ export const BlogDetails = () => {
     };
 
     return (
+        <>
+        <HeaderBlog />
         <div className="container my-5">
             <div className="row">
                 <main className="col-lg-8">
@@ -351,5 +354,7 @@ export const BlogDetails = () => {
                 style={{ zIndex: 9999999999 }}
               />
         </div>
+        <FooterBlog />
+        </>
     );
 };
