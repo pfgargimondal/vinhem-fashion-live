@@ -12,7 +12,7 @@ function App() {
   const hideFullHeaderFooterRoutes = ["/invoice", "/blog"];
 
   const shouldHideHeader = hideHeaderRoutes.includes(pathname);
-  const shouldHideFullHeaderFooterRoutes = hideFullHeaderFooterRoutes.includes(pathname);
+  const shouldHideFullHeaderFooterRoutes = hideFullHeaderFooterRoutes.includes(pathname) || pathname.startsWith("/blog/");
 
   return (
     <div className="App">
