@@ -381,7 +381,10 @@ export const Filter = () => {
                               <div className={`fdbdfgdfgdf ${ !viewType ? "col-lg-12 px-1" : "col-lg-9"}`}>
                                 <h6><i class="bi me-1 bi-truck"></i> Ships in {product.shipping_time}</h6>
 
-                                {product.product_category === "READY TO SHIP" && (
+                                {/* {product.product_category === "READY TO SHIP" && (
+                                  <h6><i class="bi me-1 bi-rocket-takeoff"></i> Ready to ship</h6>
+                                )} */}
+                                {product.rts_quantity > '0' && (
                                   <h6><i class="bi me-1 bi-rocket-takeoff"></i> Ready to ship</h6>
                                 )}
 

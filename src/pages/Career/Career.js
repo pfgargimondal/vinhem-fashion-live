@@ -94,8 +94,12 @@ export const Career = () => {
 
                 <div className={`answercont ${jobAccordion === jobOpening.id ? "open" : ""}`}>
                   <div className="answer">
-                    <div className="bgdf55ff">
-                      <p>{jobOpening?.description}</p>
+                    <div className="bgdf55ff" 
+                    dangerouslySetInnerHTML={{
+                        __html:
+                          jobOpening?.description ||
+                          "Be a part of Vinham Fashion’s inspiring creative journey and help us shape the future of global style. Explore exciting career opportunities and grow with our passionate team.",
+                      }}>
                     </div>
                   </div>
                 </div>

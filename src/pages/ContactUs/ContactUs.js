@@ -220,6 +220,7 @@ export const ContactUs = () => {
         </p>
         <div className={styles.xfhgjhusfgsd}>
             <div className="container">
+              <h3 className="mb-4"><strong>We're listening</strong></h3>
                 <div className={styles.bfghfds}>
                   <form noValidate onSubmit={submitForm} encType="multipart/form-data">
                     <div className="row">
@@ -313,7 +314,7 @@ export const ContactUs = () => {
                                                     />
 
                                                 <label for="file" className={`btn ${styles.btnUpload}`}>
-                                                  <i className="fa-solid fa-plus"></i> Choose File
+                                                  <i className="fa-solid fa-plus"></i> Attach a File
                                                 </label>
                                                 <p style={{ color: "red" }}>{errors.attached_file}</p>
                                             </div>

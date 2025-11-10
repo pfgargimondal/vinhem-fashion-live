@@ -114,6 +114,16 @@
   padding: 2px 10px;
 }
 
+.fvgndfjgf select{
+  padding: 10px;
+  border: 1px solid var(--grey-border-color);
+  border-radius: 5px;
+}
+
+.dfgndfjhgdf .btn {
+  width: 146px;
+}
+
 .fjhdfbgdds {
   width: 100%;
   padding: 40px 0;
@@ -153,20 +163,26 @@
   color: #000;
 }
 
-.dfgndfjhgdf .btn-main:first-child{
+.dfgndfjhgdf .col-lg-6:first-child .btn-main{
   background: var(--pink-main-color);
   border-color: var(--pink-main-color) !important;
 }
 
 .dfgndfjhgdf .btn-transparent {
-  border: 1px solid var(--grey-border-color);
-  background: transparent;
-  color: var(--black-background-color);
+  border: 1px solid var(--pink-main-color) !important;
+  background: var(--pink-main-color);
+  color: #fff;
 }
 
 .dfgndfjhgdf .btn-transparent:hover {
-  background: var(--black-background-color) !important;
-  color: #fff !important;
+  background: #fff !important;
+  color: #000 !important;
+  border-color: var(--pink-main-color) !important;
+  transition: 0.3s ease-in-out;
+}
+
+.dfgndfjhgdf .btn-transparent:hover i{
+  color: var(--pink-main-color);
   transition: 0.3s ease-in-out;
 }
 
@@ -179,6 +195,10 @@
 }
 .dfghdfgdf55 h6 span {
   color: var(--pink-main-color);
+}
+
+.kjidbwejgrwerwer{
+  width: 87%;
 }
 
 .kjidbwejgrwerwer i {
@@ -282,12 +302,27 @@
   font-weight: 500 !important;
   padding: 0.6rem 1.4rem !important;
 }
+.dopwejoirjhwer .col-lg-4:nth-of-type(3n - 1) button.btn-transparent{
+  background: var(--pink-main-color);
+  color: #fff;
+  border-color: var(--pink-main-color);
+}
+.dopwejoirjhwer .col-lg-4:nth-of-type(3n - 1) button.btn-transparent i{
+  color: #fff;
+}
+.dopwejoirjhwer .col-lg-4:nth-of-type(3n - 1) button.btn-transparent:hover{
+  background: #fff;
+  color: #000;
+}
+.dopwejoirjhwer .col-lg-4:nth-of-type(3n - 1) button.btn-transparent:hover i{
+  color: #000;
+}
 .dopwejoirjhwer button.btn-transparent i {
   color: var(--pink-main-color);
 }
 .dopwejoirjhwer button:hover {
   background: var(--black-background-color);
-  color: #fff;
+  color: #000;
   transition: 0.3s ease-in-out;
   border-radius: 50px;
 }
@@ -295,15 +330,14 @@
   color: #fff;
   transition: 0.3s ease-in-out;
 }
-.dopwejoirjhwer button.btn-main {
-  color: #fff !important;
-}
-.dopwejoirjhwer button.btn-main:hover {
-  color: #000 !important;
-}
+
 .dopwejoirjhwer button.btn-main:hover i {
   color: var(--pink-main-color) !important;
   transition: 0.3s ease-in-out;
+}
+
+.dopwejoirjhwer{
+  width: 90%;
 }
 
 .coisdefisdhifhsdjifjhosd .dfgjhbdfg {
@@ -891,7 +925,7 @@
 }
 
 .skdncfjsdbcfksdnf .btn-main img{
-  width: 1.8rem;
+  width: 1.4rem;
   transform: rotate(-45deg);
   transition: 0.3s ease-in-out;
 }
@@ -1606,3 +1640,42 @@
   opacity: 0 !important;
   transition: 0.1s ease-in-out;
 }
+
+
+
+/*later modal start*/
+
+.later-modal{
+  width: 30%;
+  border-radius: 10px;  
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999999;
+  opacity: 1;
+  transition: 0.1s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+.later-modal-hide{
+  opacity: 0 !important;
+  z-index: -9999 !important;
+  transition: 0.1s ease-in-out;
+}
+
+.later-modal-backdrop{
+  background: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+  z-index: 999999;
+  opacity: 1;
+  transition: 0.1s ease-in-out;
+}
+
+.later-modal-backdrop-hide{
+  z-index: -9999 !important;
+  opacity: 0 !important;
+  transition: 0.1s ease-in-out;
+}
+
+/*later modal end*/

@@ -106,7 +106,7 @@ export const FeaturedProducts = ({ featuredProduct }) => {
                 <div className={`fdbdfgdfgdf`}>
                   <h6><i class="bi me-1 bi-truck"></i> Ships in {featuredProduct.shipping_time}</h6>
 
-                  {featuredProduct.product_category === "READY TO SHIP" && (
+                  {featuredProduct.rts_quantity > '0' && (
                     <h6><i class="bi me-1 bi-rocket-takeoff"></i> Ready to ship</h6>
                   )}
 

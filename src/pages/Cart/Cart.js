@@ -24,25 +24,26 @@ export const Cart = () => {
   const [selectedDiscount, setSelectedDiscount] = useState(0);
   const [appliedDiscount, setAppliedDiscount] = useState(0);
   const [couponApplied, setCouponApplied] = useState(false);
-
+  // eslint-disable-next-line
   const { selectedCurrency } = useCurrency();
 
   const fetchCartlist = useCallback(async () => {
-    if (!token || !selectedCurrency) return;
+    if (!token) return;
 
     try {
       const res = await http.post(
         "/user/get-cart-user",
-        { country: selectedCurrency.country_name },
+        // { country: selectedCurrency.country_name },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+
       setcartItems(res.data.data || []);
       settotalPrice(res.data.total_cart_price || "");
       setproductCoupon(res.data.all_productCoupon || []);
     } catch (error) {
       console.error("Failed to fetch cart list", error);
     }
-  }, [token, selectedCurrency]);
+  }, [token]);
 
   useEffect(() => {
     fetchCartlist();

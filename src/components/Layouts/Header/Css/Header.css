@@ -256,6 +256,16 @@ header .header-main{
   box-shadow: rgba(0, 0, 0, 0.45) 0px 20px 20px -20px;
 }
 
+.safsrfwee{
+  height: 114px;
+}
+
+.safsrfwee img{
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.8rem;
+}
+
 header .header-main .swiper-slide:hover .header-mega-menu{
   z-index: 999;
   visibility: visible;

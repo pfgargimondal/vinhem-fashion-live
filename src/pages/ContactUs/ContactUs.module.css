@@ -150,9 +150,14 @@
   opacity: hidden;
   }
 
+  .xfhgjhusfgsd h3{
+    font-family: "Merriweather", serif;
+    font-style: italic;
+  }
+
 .inputFile + label {
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   color:#0019db;
   background-color:rgb(0, 56, 210);
   display:block ;

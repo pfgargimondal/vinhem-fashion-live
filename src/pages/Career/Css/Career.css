@@ -131,18 +131,19 @@
 .xfxf888 .form-control
 {
   padding: 10px;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(96, 96, 96) 0px 0px 0px 1px inset;
 }
 
 
 .xfxf888 .form-select
 {
   padding: 10px;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(96, 96, 96) 0px 0px 0px 1px inset;
-
-
+  border: 1px solid var(--text-gray-color);
 }
 
+.xfxf888 textarea
+{
+  border: 1px solid var(--text-gray-color);
+}
 
 .dfbgjhdf5
 {

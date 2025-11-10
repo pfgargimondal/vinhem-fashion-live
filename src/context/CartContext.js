@@ -8,6 +8,7 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
   const { token } = useAuth();
   const [cartCount, setCartCount] = useState(0);
+  // eslint-disable-next-line
   const { selectedCurrency } = useCurrency();
 
   // ✅ Fetch cart count from API
@@ -20,9 +21,9 @@ export function CartProvider({ children }) {
     try {
       const res = await http.post(
         "/user/get-cart-user",
-        {
-          country: selectedCurrency.country_name, // ✅ safe now
-        },
+        // {
+        //   country: selectedCurrency.country_name, // ✅ safe now
+        // },
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -32,7 +33,7 @@ export function CartProvider({ children }) {
       console.error("Error fetching cart count", err);
       setCartCount(0);
     }
-  }, [token, selectedCurrency]); // ✅ added token as dependency
+  }, [token]); // ✅ added token as dependency
 
   useEffect(() => {
     fetchCartCount();

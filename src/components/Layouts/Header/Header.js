@@ -362,10 +362,9 @@ export const Header = ({ shouldHideHeader, shouldHideFullHeaderFooterRoutes }) =
                         <div className="h-m-m-inner bg-white py-2 mt-3">
                           <div className="container-fluid">
                             <div className="row">
-                              <div className="col-lg-7">
+                              <div className="col-lg-6">
                                 <div className="ojkmiweee_left py-3">
                                   <div className="row">
-
                                     {category.head_categories?.map((headCat) => (
                                       <div className="col-lg-4" key={headCat.id}>
                                         <div className="oieniuiewr_inner">
@@ -373,9 +372,22 @@ export const Header = ({ shouldHideHeader, shouldHideFullHeaderFooterRoutes }) =
                                           <ul className="mb-0 ps-0">
                                             {headCat.sub_categories?.slice(0, 8).map((subCat) => (
                                               <li key={subCat.id}>
-                                                <Link to={`/${category.mainCategory_slug}/${subCat.subCategories_slug}`}>
-                                                  {subCat.subCategories_name.replace(/\s*\(Boys\)|\s*\(Girls\)/gi, "")}
-                                                </Link>
+
+                                                {(
+                                                  headCat.headCategories_name === 'IN-HOUSE DESIGNERS' || 
+                                                  headCat.headCategories_name === 'TRENDING NOW' || 
+                                                  headCat.headCategories_name === 'FEATURED'
+                                                ) ? (
+                                                  <Link to={`${subCat.subCategories_url}`}>
+                                                    {subCat.subCategories_name.replace(/\s*\(Boys\)|\s*\(Girls\)/gi, "")}
+                                                  </Link>
+                                                ) : (
+                                                  <Link to={`/${category.mainCategory_slug}/${subCat.subCategories_slug}`}>
+                                                    {subCat.subCategories_name.replace(/\s*\(Boys\)|\s*\(Girls\)/gi, "")}
+                                                  </Link>
+                                                )}
+
+                                                
                                               </li> 
                                               
                                             ))}
@@ -480,23 +492,34 @@ export const Header = ({ shouldHideHeader, shouldHideFullHeaderFooterRoutes }) =
                                 </div>
                               </div>
 
-                              <div className="col-lg-5">
+                              <div className="col-lg-6">
                                 <div className="ojkmiweee_right">
-                                  <div className="row flex-nowrap">
-                                    {category.mainCategory_banner?.map((CategoryBanner) => (
-                                      <div className="col-4" key={CategoryBanner.id}>
-                                        <div className="pkopkerrwer text-center">
-                                          <Link to={`${CategoryBanner.category_bannerURL}`}>
-                                            <img style={{height: "295px", objectFit: "cover"}} src={`${CategoryBanner.category_bannerImage_url}/${CategoryBanner.category_bannerImage}`} className="w-100" alt="" />
-                                          </Link>
-                                          
-                                          <div className="dkewbjnrkwejrwer mt-2">
-                                            {/* <h5>{CategoryBanner.category_bannerTitle}</h5> */}
-                                            {/* <a href={`${CategoryBanner.category_bannerURL}`}>SHOW NOW</a> */}
+                                  <div className="row">
+                                    <div className="col-lg-7">
+                                      <div className="row">
+                                        {category.mainCategory_banner?.map((CategoryBanner) => (
+                                          <div className="col-lg-6" key={CategoryBanner.id}>
+                                            <div className="pkopkerrwer text-center">
+                                              <img src={`${CategoryBanner.category_bannerImage_url}/${CategoryBanner.category_bannerImage}`} className="w-100" alt="" />
+                                              <div className="dkewbjnrkwejrwer mt-2">
+                                                {/* <h5>{CategoryBanner.category_bannerTitle}</h5> */}
+                                                <a href={`${CategoryBanner.category_bannerURL}`}>SHOW NOW</a>
+                                              </div>
+                                            </div>
                                           </div>
-                                        </div>
+                                        ))}
                                       </div>
-                                    ))}
+                                    </div>                                    
+
+                                    <div className="col-lg-5">
+                                      <div className="pkopkerrwer safsrfwee text-center mb-4">
+                                        <img src="https://vinhem-ecommerce.workstream.club/public/FTP-Folders/All-Banners/Menu-Banners/1757417753_68c011194c83a.png" className="w-100" alt="" />                                        
+                                      </div>
+
+                                      <div className="pkopkerrwer safsrfwee text-center">
+                                        <img src="https://vinhem-ecommerce.workstream.club/public/FTP-Folders/All-Banners/Menu-Banners/1757417753_68c011194c83a.png" className="w-100" alt="" />                                        
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>

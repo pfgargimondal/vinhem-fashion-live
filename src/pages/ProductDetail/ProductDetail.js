@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation, Mousewheel } from "swiper/modules";
 // eslint-disable-next-line
@@ -32,6 +32,7 @@ export const ProductDetail = () => {
 
   const { token, user } = useAuth();
   const { addToCart } = useCart();
+  const navigate = useNavigate();
   // eslint-disable-next-line
   const [show, setShow] = useState(false);
   // eslint-disable-next-line
@@ -44,7 +45,24 @@ export const ProductDetail = () => {
   const [turbanModal, setTurbanModal] = useState(false);
   const [mojriModal, setMojriModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showLaterModal, setShowLaterModal] = useState(false);
   const [activeKey, setActiveKey] = useState("first");
+
+  const handleLaterToggle = () => {
+    const html = document.querySelector("html");
+
+    html.classList.add("overflow-hidden");
+
+    setShowLaterModal(!showLaterModal);
+  }
+
+  const handleLaterClose = () => {
+    const html = document.querySelector("html");
+
+    html.classList.remove("overflow-hidden");
+
+    setShowLaterModal(!showLaterModal);
+  }
 
 
   const handlePGShowModal = (e, key) => {
@@ -350,6 +368,11 @@ export const ProductDetail = () => {
     return;
   }
 
+  if(selectedStitchOption === ''){
+    alert("Please Choose Stiching Option.");
+    return;
+  }
+
   // ✅ 3. Determine correct price logic
   const baseSellingPrice = parseFloat(productDetails?.data?.selling_price || 0);
   const priceToUse = selectedPrice > 0 ? selectedPrice : baseSellingPrice;
@@ -417,6 +440,13 @@ export const ProductDetail = () => {
   addToCart(productData);
 
 };
+
+  const handleBuyNow = async () => {
+    const added = await handleAddToCart();
+    if (added) {
+      navigate("/cart");
+    }
+  };
 
   const [mssrmntSbmtConfrm, setMssrmntSbmtConfrm] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -732,7 +762,7 @@ export const ProductDetail = () => {
                     </div>
 
                     <div className="fhdfgh">
-                      <p className="d-flex align-items-center flex-wrap">Item ID: {productDetails?.data?.item_id} | Views {productDetails?.data?.views} <i class="bi ms-2 bi-eye"></i></p>
+                      <p className="d-flex align-items-center flex-wrap">Item ID: {productDetails?.data?.item_id} | {productDetails?.data?.views} Views <i class="bi ms-2 bi-eye"></i></p>
                     </div>
 
                     <div className="dfjghdfgdff58 mb-4">
@@ -757,8 +787,7 @@ export const ProductDetail = () => {
 
                       <div class="diwenjrbwebrwehgrwer">
                         <h4 class="pb-2">Stitching Options</h4>
-
-                        <hr class="mt-0" />
+                        <hr class="mt-0" style={{width: "86%"}} />
                       </div>
 
                       <div className="saoijhdekjwirwer row align-items-center mb-3">
@@ -809,7 +838,7 @@ export const ProductDetail = () => {
                                   </Link>
                                 )}
                                 </span> or <span>
-                                  <Link to="">Later</Link>
+                                  <Link onClick={handleLaterToggle} to="">Later</Link>
                                   </span>
                                 </p>
                               <p className="mb-0">+7 days, for your chosen stitching options.</p>
@@ -818,11 +847,11 @@ export const ProductDetail = () => {
                       )}
 
                       {/* id="custmze-otft-btn"> */}
-
-                      <div className="row sdfasdctgerrrrwe">
-                        <div className="col-lg-5 col-md-8 col-sm-8 col-8">
-                          <div className="dgndfjgdf">
-                            <select
+                      {productDetails?.data?.stitching_option === 'Ready To Wear' && (
+                        <div className="row sdfasdctgerrrrwe">
+                          <div className="col-lg-5 col-md-8 col-sm-8 col-8">
+                            <div className="dgndfjgdf">
+                              <select
                                 name="product_size"
                                 id="product_size"
                                 className="form-select"
@@ -830,56 +859,80 @@ export const ProductDetail = () => {
                                 value={selectedSize}
                               >
                                 <option value="">Select Size</option>
-                                {productDetails?.data?.product_allSize?.map((item, index) => (
-                                  <React.Fragment key={index}>
-                                    <option value={item.filter_size}>{item.filter_size}</option>
-                                    {item.plus_sizes && item.plus_sizes !== "0" && (
-                                      <option value={item.plus_sizes}>
-                                        {item.plus_sizes} 
-                                
-                                      </option>
-                                    )}
-                                  </React.Fragment>
-                                ))}
-                              </select>
-                            <p className="mt-2">
-                              {productDetails?.data?.mto_quantity <= 5 && (
-                                <>Only few left</>
-                              )}
-                            </p>
-                          </div>
-                        </div>
 
-                        <div className="col-lg-4 col-md-4 col-sm-4 col-4">
-                          <div className="dokewhkjrhuiwerwer skdncfjsdbcfksdnf">
-                            <button className="btn btn-main" onClick={() => setShowSizeGuide(!showSizeGuide)}><img src="/images/ruler.png" alt="" /> Size Guide</button>
+                                {(() => {
+                                  const sizeOrder = [
+                                    "XS", "S", "M", "L", "XL",
+                                    "2XL", "3XL", "4XL", "5XL",
+                                    "6XL", "7XL", "8XL", "9XL", "10XL"
+                                  ];
+
+                                  // Flatten sizes (filter_size + plus_sizes)
+                                  const flatSizes = productDetails?.data?.product_allSize?.flatMap(item => {
+                                    const arr = [item.filter_size];
+                                    if (item.plus_sizes && item.plus_sizes !== "0") {
+                                      arr.push(item.plus_sizes);
+                                    }
+                                    return arr;
+                                  }) || [];
+
+                                  // Sort sizes using prefix before "-"
+                                  const sorted = flatSizes.sort((a, b) => {
+                                    const prefixA = a.split("-")[0];
+                                    const prefixB = b.split("-")[0];
+                                    return sizeOrder.indexOf(prefixA) - sizeOrder.indexOf(prefixB);
+                                  });
+
+                                  // Return sorted options
+                                  return sorted.map((size, index) => (
+                                    <option key={index} value={size}>
+                                      {size}
+                                    </option>
+                                  ));
+                                })()}
+                              </select>
+                              <p className="mt-2">
+                                {productDetails?.data?.mto_quantity <= 5 && (
+                                  <>Only few left</>
+                                )}
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="col-lg-4 col-md-4 col-sm-4 col-4">
+                            <div className="dokewhkjrhuiwerwer skdncfjsdbcfksdnf">
+                              <button className="btn btn-main px-0" onClick={() => setShowSizeGuide(!showSizeGuide)}><img src="/images/ruler.png" alt="" /> Size Guide</button>
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      )} 
+                      
                     </div>
 
-                    <div className="fvgndfjgf">
-                      <label htmlFor="" className="me-1">
-                        Qty:
-                      </label>
-                      <select
-                        name="product_quantity"
-                        id="product_quantity"
-                        value={selectedQuantity}
-                        onChange={(e) => handleQuantitySelect(Number(e.target.value))}
-                        disabled={!availableQty}
-                      >
-                        {availableQty > 0 ? (
-                          Array.from({ length: availableQty }, (_, i) => (
-                            <option key={i + 1} value={i + 1}>
-                              {i + 1}
-                            </option>
-                          ))
-                        ) : (
-                          <option value="">Select Size First</option>
-                        )}
-                      </select>
-
+                    <div className="row">
+                      <div className="fvgndfjgf col-lg-8">
+                        <label htmlFor="" className="form-label me-1">
+                          Qty:
+                        </label>
+                        <select
+                          name="product_quantity"
+                          id="product_quantity"
+                          value={selectedQuantity}
+                          onChange={(e) => handleQuantitySelect(Number(e.target.value))}
+                          disabled={!availableQty}
+                          className="form-select"
+                        >
+                          {availableQty > 0 ? (
+                            Array.from({ length: availableQty }, (_, i) => (
+                              <option key={i + 1} value={i + 1}>
+                                {i + 1}
+                              </option>
+                            ))
+                          ) : (
+                            <option value="">Select Size First</option>
+                          )}
+                        </select>
+                      </div>
                     </div>
 
 
@@ -1069,17 +1122,17 @@ export const ProductDetail = () => {
                       </div>
 
                       <div className="dfgndfjhgdf">
-                        <button className="btn btn-main px-4 me-3" onClick={handleAddToCart}>
+                        <button className="btn btn-main px-3 me-3" onClick={handleAddToCart}>
                           <i class="bi bi-bag me-1"></i> Add To Cart
                         </button>
 
-                        <button className="btn btn-main btn-transparent px-4">
+                        <button className="btn btn-main btn-transparent px-3" onClick={handleBuyNow}>
                           <i class="bi bi-bag me-1"></i> Buy Now
                         </button>
                       </div>
                     </div>
 
-                    <div className="kjidbwejgrwerwer col-lg-12 position-relative mt-5">
+                    <div className="kjidbwejgrwerwer position-relative mt-5">
                       <i class="bi bi-geo-alt position-absolute"></i>
 
 
@@ -1115,7 +1168,7 @@ export const ProductDetail = () => {
                     <div className="diwenjrbwebrwehgrwer mt-5">
                       <h4 className="pb-2">Customer Info</h4>
 
-                      <hr className="mt-0" />
+                      <hr className="mt-0" style={{width: "86%"}} />
 
                       <div className="row">
                         <div className="col-lg-6">
@@ -1176,7 +1229,7 @@ export const ProductDetail = () => {
                     <div className="diwenjrbwebrwehgrwer mt-5">
                       <h4 className="pb-2 me-2 mb-0">Offers & EMI</h4>
 
-                      <hr className="mt-0" />
+                      <hr className="mt-0" style={{width: "86%"}} />
 
                       <div className="injdewrwer d-flex">
                         <h4 className="mb-0 me-2">Coupon Code -</h4>
@@ -1213,7 +1266,7 @@ export const ProductDetail = () => {
                         </div>
                       </div>
 
-                      <hr className="mt-0" />
+                      <hr className="mt-0" style={{width: "86%"}} />
 
                       <div className="dopwejoirjhwer row">
                         <div className="col-lg-4">
@@ -1669,6 +1722,24 @@ export const ProductDetail = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* later modal */}
+
+      <div className={`${showLaterModal ? "later-modal-backdrop" : "later-modal-backdrop later-modal-backdrop-hide"} w-100 h-100 position-fixed`}></div>
+
+      <div className={`${showLaterModal ? "later-modal" : "later-modal later-modal-hide"} position-fixed bg-white`}>
+        <div className="s-s-m-header d-flex align-items-center justify-content-between p-3 border-bottom-0">
+          {/* <h4 className="mb-0"></h4> */}
+
+          <i class="bi bi-x-lg" onClick={handleLaterClose}></i>
+        </div>
+
+        <div className="later-modal-body text-center p-4 pt-0">
+          <h4>You can place your order successfully, but you must provide your measurements first for shipping.</h4>
+
+          <button onClick={handleLaterClose} className="btn btn-main mt-4 px-4">Ok</button>
         </div>
       </div>
 

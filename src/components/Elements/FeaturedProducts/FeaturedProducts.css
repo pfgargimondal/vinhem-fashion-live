@@ -249,7 +249,8 @@
   border-radius: 25px;
   user-select: none;
   display: inline-block;
-  background: rgba(232, 232, 232, 0.7);
+  /* background: rgba(232, 232, 232, 0.7); */
+  background-color: #fff3cd;
 }
 .fdbdfgdfgdf h6 i{
   color: var(--pink-main-color);

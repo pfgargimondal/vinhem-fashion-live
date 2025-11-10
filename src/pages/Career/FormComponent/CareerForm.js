@@ -131,13 +131,13 @@ export const CareerForm = () => {
           <div className="col-lg-6">
             <div className="gjsdfgs">
               <div className="xfxf888">
-                <label>Contact Number</label>
+                <label>Contact No</label>
                 <input
                   type="text"
                   className="form-control"
                   name="contact_no"
                   maxLength={10}
-                  placeholder="Enter Contact Number"
+                  placeholder="Enter Contact No"
                   value={inputs.contact_no}
                   onChange={handleChange}
                 />
@@ -154,7 +154,7 @@ export const CareerForm = () => {
                   type="email"
                   className="form-control"
                   name="email"
-                  placeholder="Enter Email Id"
+                  placeholder="Enter Your Email"
                   value={inputs.email}
                   onChange={handleChange}
                 />
@@ -178,6 +178,24 @@ export const CareerForm = () => {
                 <p style={{ color: "red" }}>{errors.job_position}</p>
               </div>
             </div>
+          </div>          
+
+          <div className="col-lg-6">
+            <div className="gjsdfgs">
+              <div className="xfxf888">
+                <label>Message</label>
+                
+                <textarea
+                  name="message"
+                  className="form-control"
+                  rows="4"
+                  placeholder="Type here..."
+                  value={inputs.message}
+                  onChange={handleChange}
+                />
+                <p style={{ color: "red" }}>{errors.message}</p>
+              </div>
+            </div>
           </div>
 
           <div className="col-lg-6">
@@ -193,23 +211,6 @@ export const CareerForm = () => {
                   onChange={handleChange}
                 />
                 <p style={{ color: "red" }}>{errors.upload_cv}</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-lg-12">
-            <div className="gjsdfgs">
-              <div className="xfxf888">
-                <label>Message</label>
-                <textarea
-                  name="message"
-                  className="form-control"
-                  rows="4"
-                  placeholder="Type here..."
-                  value={inputs.message}
-                  onChange={handleChange}
-                />
-                <p style={{ color: "red" }}>{errors.message}</p>
               </div>
             </div>
           </div>
