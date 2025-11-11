@@ -9,5 +9,6 @@ export { MeasurementForm } from "./Elements/MeasurementForm/MeasurementForm";
 
 
 export { ScrollToTop } from "./Others/ScrollToTop";
+export {ChatProfileDetails} from "./Elements/ChatProfileDetails/ChatProfileDetails";
 export {DropdownLoggedIn} from "./Elements/Dropdown/DropdownLoggedIn";
 export {UserProfileNavMenu} from "./Elements/UserProfileNavMenu/UserProfileNavMenu";

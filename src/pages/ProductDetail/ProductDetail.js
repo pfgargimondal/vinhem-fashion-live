@@ -14,7 +14,7 @@ import Modal from 'react-bootstrap/Modal';
 // eslint-disable-next-line
 import Form from 'react-bootstrap/Form';
 import RecentlyViewed from "../../hooks/RecentlyViewed";
-import { FeaturedProducts, MeasurementForm } from "../../components";
+import { ChatProfileDetails, FeaturedProducts, MeasurementForm } from "../../components";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 import "./Css/ProductDetail.css";
@@ -27,6 +27,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useWishlist } from "../../context/WishlistContext";
 import { DesignerSizeChart } from "../../components/Elements/DsignerSizeChart/DsignerSizeChart";
 import { useCart } from "../../context/CartContext";
+
 
 export const ProductDetail = () => {
 
@@ -47,6 +48,7 @@ export const ProductDetail = () => {
   const [showModal, setShowModal] = useState(false);
   const [showLaterModal, setShowLaterModal] = useState(false);
   const [activeKey, setActiveKey] = useState("first");
+  const [chatProfileDetailsShow, setChatProfileDetailsShow] = useState(false);
 
   const handleLaterToggle = () => {
     const html = document.querySelector("html");
@@ -768,7 +770,13 @@ export const ProductDetail = () => {
                     <div className="dfjghdfgdff58 mb-4">
                       <h4 className="d-flex mb-1">
                         <span className="discounted-price d-flex align-items-center">
-                          <i class="bi bi-currency-rupee"></i> {productDetails?.data?.selling_price}
+                          {/* <i class="bi bi-currency-rupee"></i>  */}
+                          {new Intl.NumberFormat("en-IN", {
+                            style: "currency",
+                            currency: "INR",
+                            maximumFractionDigits: 0,
+                          }).format(productDetails?.data?.selling_price)}
+                          {/* {productDetails?.data?.selling_price} */}
                         </span>
 
                         <span className="gdfg55 d-flex align-items-center ms-2">
@@ -1270,7 +1278,7 @@ export const ProductDetail = () => {
 
                       <div className="dopwejoirjhwer row">
                         <div className="col-lg-4">
-                          <button className="btn w-100 btn-main">
+                          <button className="btn w-100 btn-main" onClick={() => setChatProfileDetailsShow(true)}>
                             <i class="bi me-1 bi-chat-left-text"></i> Chat Now
                           </button>
                         </div>
@@ -1575,7 +1583,7 @@ export const ProductDetail = () => {
                                             style: "currency",
                                             currency: "INR",
                                             maximumFractionDigits: 0,
-                                            useGrouping: false, 
+                                            // useGrouping: false, 
                                           }).format(matchingProduct.selling_price)}</h5>
                                     </div>
                                   </div>
@@ -1647,6 +1655,15 @@ export const ProductDetail = () => {
 
 
       <MeasurementForm mssrmntSbmtConfrm={mssrmntSbmtConfrm} setMssrmntSbmtConfrm={setMssrmntSbmtConfrm} showSizeModal={showSizeModal} setShowSizeModal={setShowSizeModal} productDetails={productDetails} />
+
+
+
+      {/*chat now modal*/}
+      
+
+      {chatProfileDetailsShow && (
+        <ChatProfileDetails setChatProfileDetailsShow={setChatProfileDetailsShow} />
+      )}
 
 
       {/* size guide size */}

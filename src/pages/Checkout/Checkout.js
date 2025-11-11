@@ -236,7 +236,7 @@ export const Checkout = () => {
       return;
     }
 
-    // try {
+    try {
       const res = await http.post(
         "/user/placed-order",
         {
@@ -277,10 +277,10 @@ export const Checkout = () => {
       } else {
         toast.error(res.data.message || "Failed to place order");
       }
-    // } catch (error) {
-    //   console.error("Order failed", error);
-    //   toast.error("Something went wrong while placing order");
-    // }
+    } catch (error) {
+      console.error("Order failed", error);
+      toast.error("Something went wrong while placing order");
+    }
   };
 
   return (

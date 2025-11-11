@@ -253,7 +253,7 @@ header .header-main .swiper-slide a {
 
 header .header-main{
   border-bottom: 1px solid var(--light-background-color);
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 20px 20px -20px;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 20px 20px -16px;
 }
 
 .safsrfwee{

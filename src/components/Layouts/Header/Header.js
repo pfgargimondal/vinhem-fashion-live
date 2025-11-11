@@ -103,39 +103,6 @@ export const Header = ({ shouldHideHeader, shouldHideFullHeaderFooterRoutes }) =
   }, [pathName]);
 
 
-  const getCountryCode = (currencyCode) => {
-    if (!currencyCode) return "un"; // fallback if null/undefined
-
-    const mapping = {
-      USD: "us", // United States 🇺🇸
-      EUR: "eu", // European Union 🇪🇺
-      GBP: "gb", // United Kingdom 🇬🇧
-      CAD: "ca", // Canada 🇨🇦
-      AFN: "af", // Afghanistan 🇦🇫
-      INR: "in", // India 🇮🇳
-      AUD: "au", // Australia 🇦🇺
-      AED: "ae", // United Arab Emirates 🇦🇪
-      SGD: "sg", // Singapore 🇸🇬
-      JPY: "jp", // Japan 🇯🇵
-      CNY: "cn", // China 🇨🇳
-      NZD: "nz", // New Zealand 🇳🇿
-      CHF: "ch", // Switzerland 🇨🇭
-      ZAR: "za", // South Africa 🇿🇦
-      SEK: "se", // Sweden 🇸🇪
-      NOK: "no", // Norway 🇳🇴
-      DKK: "dk", // Denmark 🇩🇰
-      HKD: "hk", // Hong Kong 🇭🇰
-      MYR: "my", // Malaysia 🇲🇾
-      THB: "th", // Thailand 🇹🇭
-      PKR: "pk", // Pakistan 🇵🇰
-      BDT: "bd", // Bangladesh 🇧🇩
-      LKR: "lk", // Sri Lanka 🇱🇰
-    };
-
-    // Normalize input and return mapped country code, default to UN flag
-    return mapping[currencyCode.toUpperCase()] || "un";
-  };
-
 
   return (
     <>
@@ -234,25 +201,26 @@ export const Header = ({ shouldHideHeader, shouldHideFullHeaderFooterRoutes }) =
 
                           <div className="custom-currency-dropdown position-relative">
                             <button
-                              className="currency-toggle-btn d-flex align-items-center"
-                              onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
-                            >
-                              <span className="me-2">
-                                <img
-                                  src={`https://flagcdn.com/24x18/${getCountryCode(selectedCurrency?.currency_code || "INR")}.png`}
-                                  alt={selectedCurrency?.currency_code || "INR"}
-                                  className="me-0"
-                                  width="24"
-                                  height="18"
-                                />
-                              </span>
-                              <span>{selectedCurrency?.currency_code || "INR"}</span>
-                              <i
-                                className={`fa-solid ms-2 ${
-                                  showCurrencyDropdown ? "fa-chevron-up" : "fa-chevron-down"
-                                }`}
-                              ></i>
-                            </button>
+                                className="currency-toggle-btn d-flex align-items-center"
+                                onClick={() => setShowCurrencyDropdown(!showCurrencyDropdown)}
+                              >
+                                <span className="me-2">
+                                  <img
+                                    src={selectedCurrency?.flag_icon || "https://flagcdn.com/24x18/in.png"}
+                                    alt={selectedCurrency?.currency_code || "INR"}
+                                    width="24"
+                                    height="18"
+                                  />
+                                </span>
+
+                                <span>{selectedCurrency?.currency_code || "INR"}</span>
+
+                                <i
+                                  className={`fa-solid ms-2 ${
+                                    showCurrencyDropdown ? "fa-chevron-up" : "fa-chevron-down"
+                                  }`}
+                                ></i>
+                              </button>
 
                             {showCurrencyDropdown && (
                               <ul className="currency-menu position-absolute bg-white shadow rounded-3 mt-2 mb-0 p-2">
@@ -267,7 +235,7 @@ export const Header = ({ shouldHideHeader, shouldHideFullHeaderFooterRoutes }) =
                                   >
                                     <span className="me-2">
                                       <img
-                                        src={`https://flagcdn.com/24x18/${getCountryCode(cur.currency_code)}.png`}
+                                        src={cur.flag_icon}
                                         alt={cur.currency_code}
                                         className="me-2"
                                         width="24"
@@ -404,90 +372,6 @@ export const Header = ({ shouldHideHeader, shouldHideFullHeaderFooterRoutes }) =
                                         </div>
                                       </div>
                                     ))}
-
-                                    {/* <div className="col-lg-3">
-                                      <div className="oieniuiewr_inner">
-                                        <h5>Designers</h5>
-
-                                        <ul className="mb-0 ps-0">
-                                          <li>
-                                            <Link>Vishwa By Pinki Sinha</Link>
-                                          </li>
-
-                                          <li>
-                                            <Link>Ekaya Banaras</Link>
-                                          </li>
-
-                                          <li>
-                                            <Link>Rishi and Vibhuti</Link>
-                                          </li>
-
-                                          <li>
-                                            <Link>Anamika Khanna</Link>
-                                          </li>
-
-                                          <li>
-                                            <Link>Preeti S Kapoor</Link>
-                                          </li>
-
-                                          <li>
-                                            <Link>Chandrima</Link>
-                                          </li>
-
-                                          <li>
-                                            <Link>Gulabo Jaipur</Link>
-                                          </li>
-
-                                          <li>
-                                            <Link>DiyaRajv vi</Link>
-                                          </li>
-
-                                          <li>
-                                            <Link>Ajiesh Oberoi</Link>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                    </div>
-
-                                    <div className="col-lg-3">
-                                      <div className="oieniuiewr_inner">
-                                        <h5>Trending</h5>
-
-                                        <ul className="mb-0 ps-0">
-                                          <li>
-                                            <Link>Buzworthy Styles</Link>
-                                          </li>
-
-                                          <li>
-                                            <Link>Resort Ready</Link>
-                                          </li>
-
-                                          <li>
-                                            <Link>The Bridesmaid Edit</Link>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                    </div>
-
-                                    <div className="col-lg-3">
-                                      <div className="oieniuiewr_inner">
-                                        <h5>Trending</h5>
-
-                                        <ul className="mb-0 ps-0">
-                                          <li>
-                                            <Link>Buzworthy Styles</Link>
-                                          </li>
-
-                                          <li>
-                                            <Link>Resort Ready</Link>
-                                          </li>
-
-                                          <li>
-                                            <Link>The Bridesmaid Edit</Link>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                    </div> */}
                                   </div>
                                 </div>
                               </div>

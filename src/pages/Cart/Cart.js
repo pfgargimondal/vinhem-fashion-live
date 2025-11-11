@@ -28,12 +28,12 @@ export const Cart = () => {
   const { selectedCurrency } = useCurrency();
 
   const fetchCartlist = useCallback(async () => {
-    if (!token) return;
+    if (!token || !selectedCurrency) return;
 
     try {
       const res = await http.post(
         "/user/get-cart-user",
-        // { country: selectedCurrency.country_name },
+        { country: selectedCurrency.country_name },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -43,7 +43,7 @@ export const Cart = () => {
     } catch (error) {
       console.error("Failed to fetch cart list", error);
     }
-  }, [token]);
+  }, [token, selectedCurrency]);
 
   useEffect(() => {
     fetchCartlist();

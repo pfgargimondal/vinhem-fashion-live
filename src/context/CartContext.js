@@ -13,7 +13,7 @@ export function CartProvider({ children }) {
 
   // ✅ Fetch cart count from API
   const fetchCartCount = useCallback(async () => {
-    if (!token) {
+    if (!token || !selectedCurrency) {
       setCartCount(0); // clear if not logged in
       return;
     }
@@ -21,9 +21,9 @@ export function CartProvider({ children }) {
     try {
       const res = await http.post(
         "/user/get-cart-user",
-        // {
-        //   country: selectedCurrency.country_name, // ✅ safe now
-        // },
+        {
+          country: selectedCurrency.country_name, // ✅ safe now
+        },
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -33,7 +33,7 @@ export function CartProvider({ children }) {
       console.error("Error fetching cart count", err);
       setCartCount(0);
     }
-  }, [token]); // ✅ added token as dependency
+  }, [token, selectedCurrency]); // ✅ added token as dependency
 
   useEffect(() => {
     fetchCartCount();
