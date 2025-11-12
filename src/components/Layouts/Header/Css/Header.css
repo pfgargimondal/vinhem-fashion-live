@@ -153,7 +153,7 @@ header .header-top .doewhruiwerwer_right ul li span {
   font-size: 0.8rem;
 }
 .header-main-wrapper{
-  max-width: 85%;
+  max-width: 95%;
   margin-inline: auto;
   display: flex;
   justify-content: space-between;
@@ -410,3 +410,8 @@ header .header-main .swiper-slide:nth-of-type(10n - 1):hover .header-mega-menu{
 }
 
 /*currncy cnvrtr end*/
+
+
+.hdr-cstm-wrppr{
+  max-width: 95%;
+}

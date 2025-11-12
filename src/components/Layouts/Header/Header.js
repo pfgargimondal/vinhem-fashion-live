@@ -104,6 +104,8 @@ export const Header = ({ shouldHideHeader, shouldHideFullHeaderFooterRoutes }) =
 
 
 
+
+
   return (
     <>
       { !shouldHideFullHeaderFooterRoutes && (
@@ -150,7 +152,7 @@ export const Header = ({ shouldHideHeader, shouldHideFullHeaderFooterRoutes }) =
             <div className="doiemwokjrmwewer w-100">
               { !shouldHideHeader && (
               <div className="header-top py-1">
-                <div className="container-fluid">
+                <div className="hdr-cstm-wrppr mx-auto">
                   <div className="row align-items-center">
                     <div className="col-lg-2">
                       <div className="doeiwhrkwdeor">
@@ -320,88 +322,101 @@ export const Header = ({ shouldHideHeader, shouldHideFullHeaderFooterRoutes }) =
               { !shouldHideHeader && (
               <div className="header-main bg-white py-1 position-relative">       
                 <div className="header-main-wrapper">
-                    {mainCategory?.map((category) => (
-                    <SwiperSlide key={category.id}>
-                      <NavLink to={`/${category.mainCategory_slug}`} end>
-                        {category.mainCategory_name}
-                      </NavLink>
+                    {mainCategory?.map((category) => {
 
-                      <div className="header-mega-menu position-absolute w-100">
-                        <div className="h-m-m-inner bg-white py-2 mt-3">
-                          <div className="container-fluid">
-                            <div className="row">
-                              <div className="col-lg-6">
-                                <div className="ojkmiweee_left py-3">
-                                  <div className="row">
-                                    {category.head_categories?.map((headCat) => (
-                                      <div className="col-lg-4" key={headCat.id}>
-                                        <div className="oieniuiewr_inner">
-                                          <h5>{headCat.headCategories_name}</h5>
-                                          <ul className="mb-0 ps-0">
-                                            {headCat.sub_categories?.slice(0, 8).map((subCat) => (
-                                              <li key={subCat.id}>
+                      const leftBanners = category.mainCategory_banner?.slice(0, 2);  // first 2 images
+                      const rightBanners = category.mainCategory_banner?.slice(2, 4); // next 2 images
 
-                                                {(
-                                                  headCat.headCategories_name === 'IN-HOUSE DESIGNERS' || 
-                                                  headCat.headCategories_name === 'TRENDING NOW' || 
-                                                  headCat.headCategories_name === 'FEATURED'
-                                                ) ? (
-                                                  <Link to={`${subCat.subCategories_url}`}>
-                                                    {subCat.subCategories_name.replace(/\s*\(Boys\)|\s*\(Girls\)/gi, "")}
-                                                  </Link>
-                                                ) : (
-                                                  <Link to={`/${category.mainCategory_slug}/${subCat.subCategories_slug}`}>
-                                                    {subCat.subCategories_name.replace(/\s*\(Boys\)|\s*\(Girls\)/gi, "")}
-                                                  </Link>
-                                                )}
+                      return (
 
+                      <SwiperSlide key={category.id}>
+                        <NavLink to={`/${category.mainCategory_slug}`} end>
+                          {category.mainCategory_name}
+                        </NavLink>
+                        <div className="header-mega-menu position-absolute w-100">
+                          <div className="h-m-m-inner bg-white py-2 mt-3">
+                            <div className="container-fluid">
+                              <div className="row">
+                                <div className="col-lg-6">
+                                  <div className="ojkmiweee_left py-3">
+                                    <div className="row">
+                                      {category.head_categories?.map((headCat) => (
+                                        <div className="col-lg-4" key={headCat.id}>
+                                          <div className="oieniuiewr_inner">
+                                            <h5>{headCat.headCategories_name}</h5>
+                                            <ul className="mb-0 ps-0">
+                                              {headCat.sub_categories?.slice(0, 8).map((subCat) => (
+                                                <li key={subCat.id}>
+
+                                                  {(
+                                                    headCat.headCategories_name === 'IN-HOUSE DESIGNERS' || 
+                                                    headCat.headCategories_name === 'TRENDING NOW' || 
+                                                    headCat.headCategories_name === 'FEATURED'
+                                                  ) ? (
+                                                    <Link to={`${subCat.subCategories_url}`}>
+                                                      {subCat.subCategories_name.replace(/\s*\(Boys\)|\s*\(Girls\)/gi, "")}
+                                                    </Link>
+                                                  ) : (
+                                                    <Link to={`/${category.mainCategory_slug}/${subCat.subCategories_slug}`}>
+                                                      {subCat.subCategories_name.replace(/\s*\(Boys\)|\s*\(Girls\)/gi, "")}
+                                                    </Link>
+                                                  )}
+
+                                                  
+                                                </li> 
                                                 
-                                              </li> 
-                                              
-                                            ))}
+                                              ))}
 
-                                            {/* Show "View All" if more than 8 */}
-                                            {headCat.sub_categories?.length > 8 && (
-                                              <li>
-                                                <Link to={`/${category.mainCategory_slug}`}>
-                                                  View All →
-                                                </Link>
-                                              </li>
-                                            )}
-                                          </ul>
+                                              {/* Show "View All" if more than 8 */}
+                                              {headCat.sub_categories?.length > 8 && (
+                                                <li>
+                                                  <Link to={`/${category.mainCategory_slug}`}>
+                                                    View All →
+                                                  </Link>
+                                                </li>
+                                              )}
+                                            </ul>
+                                          </div>
                                         </div>
-                                      </div>
-                                    ))}
+                                      ))}
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
 
-                              <div className="col-lg-6">
-                                <div className="ojkmiweee_right">
-                                  <div className="row">
-                                    <div className="col-lg-7">
-                                      <div className="row">
-                                        {category.mainCategory_banner?.map((CategoryBanner) => (
-                                          <div className="col-lg-6" key={CategoryBanner.id}>
-                                            <div className="pkopkerrwer text-center">
-                                              <img src={`${CategoryBanner.category_bannerImage_url}/${CategoryBanner.category_bannerImage}`} className="w-100" alt="" />
-                                              <div className="dkewbjnrkwejrwer mt-2">
-                                                {/* <h5>{CategoryBanner.category_bannerTitle}</h5> */}
-                                                <a href={`${CategoryBanner.category_bannerURL}`}>SHOW NOW</a>
+                                <div className="col-lg-6">
+                                  <div className="ojkmiweee_right">
+                                    <div className="row">
+                                      <div className="col-lg-7">
+                                        <div className="row">
+                                          {leftBanners?.map((b) => (
+                                            <div className="col-lg-6" key={b.id}>
+                                              <div className="pkopkerrwer text-center">
+                                                <img
+                                                  src={`${b.category_bannerImage_url}/${b.category_bannerImage}`}
+                                                  className="w-100"
+                                                  alt=""
+                                                />
+                                                <div className="dkewbjnrkwejrwer mt-2">
+                                                  <a href={b.category_bannerURL}>SHOW NOW</a>
+                                                </div>
                                               </div>
                                             </div>
+                                          ))}
+                                        </div>
+                                      </div>                                    
+
+                                      <div className="col-lg-5">
+                                        {rightBanners?.map((b, index) => (
+                                          <div className="pkopkerrwer safsrfwee text-center mb-4" key={index}>
+                                            <Link to={b.category_bannerURL}>
+                                              <img
+                                                src={`${b.category_bannerImage_url}/${b.category_bannerImage}`}
+                                                className="w-100"
+                                                alt=""
+                                              />
+                                            </Link>
                                           </div>
                                         ))}
-                                      </div>
-                                    </div>                                    
-
-                                    <div className="col-lg-5">
-                                      <div className="pkopkerrwer safsrfwee text-center mb-4">
-                                        <img src="https://vinhem-ecommerce.workstream.club/public/FTP-Folders/All-Banners/Menu-Banners/1757417753_68c011194c83a.png" className="w-100" alt="" />                                        
-                                      </div>
-
-                                      <div className="pkopkerrwer safsrfwee text-center">
-                                        <img src="https://vinhem-ecommerce.workstream.club/public/FTP-Folders/All-Banners/Menu-Banners/1757417753_68c011194c83a.png" className="w-100" alt="" />                                        
                                       </div>
                                     </div>
                                   </div>
@@ -410,9 +425,9 @@ export const Header = ({ shouldHideHeader, shouldHideFullHeaderFooterRoutes }) =
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </SwiperSlide>
-                  ))}  
+                      </SwiperSlide>
+                      );
+                  })}  
                 </div>    
               </div>
               ) }

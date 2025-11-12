@@ -13,3 +13,8 @@ html,
 body{
   overflow-x: clip;
 }
+
+body{
+  max-width: 1600px;
+  margin-inline: auto !important;
+}
