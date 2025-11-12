@@ -71,15 +71,26 @@ export const Header = ({ shouldHideHeader, shouldHideFullHeaderFooterRoutes }) =
   useEffect(() => {
     const fetchCurrency = async () => {
         try {
+          
             const getresponse = await http.get("/get-currency-content");
             const allresponse = getresponse.data;
-            Setcurrency(allresponse.data || []); 
+            Setcurrency(allresponse.data || []);
 
-            const defaultCurrency = allresponse.data?.find(c => c.choice === 1);
-            if (defaultCurrency) {
-              setSelectedCurrency(defaultCurrency);
+            // 👇 Step 1: Try to get previously saved currency
+            const savedCurrency = localStorage.getItem("selectedCurrency");
+
+            if (savedCurrency) {
+              // Parse and set saved currency
+              setSelectedCurrency(JSON.parse(savedCurrency));
+            } else {
+              // 👇 Step 2: Fallback to default choice = 1
+              const defaultCurrency = allresponse.data?.find(c => c.choice === 1);
+              if (defaultCurrency) {
+                setSelectedCurrency(defaultCurrency);
+                // Also save it in localStorage
+                localStorage.setItem("selectedCurrency", JSON.stringify(defaultCurrency));
+              }
             }
-
         } catch (error) {
             console.error("Error fetching currency:", error);
         }
@@ -232,6 +243,7 @@ export const Header = ({ shouldHideHeader, shouldHideFullHeaderFooterRoutes }) =
                                     className="currency-item d-flex align-items-center py-1 px-2"
                                     onClick={() => {
                                       setSelectedCurrency(cur);
+                                      localStorage.setItem("selectedCurrency", JSON.stringify(cur)); // ✅ Save selection
                                       setShowCurrencyDropdown(false);
                                     }}
                                   >

@@ -27,6 +27,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useWishlist } from "../../context/WishlistContext";
 import { DesignerSizeChart } from "../../components/Elements/DsignerSizeChart/DsignerSizeChart";
 import { useCart } from "../../context/CartContext";
+import { useCurrency } from "../../context/CurrencyContext";
 
 
 export const ProductDetail = () => {
@@ -39,7 +40,7 @@ export const ProductDetail = () => {
   // eslint-disable-next-line
   const [showMjri, setShowMjri] = useState(false);
   const [showSizeGuide, setShowSizeGuide] = useState(false);
-  // const [mesremntGuideImgShow, setMesremntGuideImgShow] = useState(false);
+  const { formatPrice } = useCurrency();
   
   const { slug } = useParams();
   const [shareModal, setShareModal] = useState(false);
@@ -770,17 +771,12 @@ export const ProductDetail = () => {
                     <div className="dfjghdfgdff58 mb-4">
                       <h4 className="d-flex mb-1">
                         <span className="discounted-price d-flex align-items-center">
-                          {/* <i class="bi bi-currency-rupee"></i>  */}
-                          {new Intl.NumberFormat("en-IN", {
-                            style: "currency",
-                            currency: "INR",
-                            maximumFractionDigits: 0,
-                          }).format(productDetails?.data?.selling_price)}
-                          {/* {productDetails?.data?.selling_price} */}
+                          {formatPrice(productDetails?.data?.selling_price)}
                         </span>
 
                         <span className="gdfg55 d-flex align-items-center ms-2">
-                          <i class="bi bi-currency-rupee"></i> {productDetails?.data?.mrp_price}
+                          <i class="bi bi-currency-rupee"></i>
+                          {formatPrice(productDetails?.data?.mrp_price)} 
                         </span>
 
                         <span className="fghfgg114 d-flex align-items-center ms-2">
@@ -804,7 +800,9 @@ export const ProductDetail = () => {
                             checked={selectedStitchOption === "stitch"}
                             onChange={() => handleStitchOptionChange("stitch")}/>
                           <label htmlFor="unstdf" className="p-3">{productDetails?.data?.stitching_option}<br /> 
-                          <span>+<i class="bi bi-currency-rupee"></i>{productDetails?.data?.stiching_charges?.price ?? 0.00}
+                          <span>+
+                            {/* <i class="bi bi-currency-rupee"></i>  */}
+                            {formatPrice(productDetails?.data?.stiching_charges?.price ?? 0.00)}
                           </span></label>
                         </div>
 
@@ -815,7 +813,9 @@ export const ProductDetail = () => {
                                   checked={selectedStitchOption === "customFit"}
                                   onChange={() => handleStitchOptionChange("customFit")}/>
                                 <label htmlFor="cf" className="p-3" id="cstm-fit-btn">Custom-Fit <br /> 
-                                <span>+<i class="bi bi-currency-rupee"></i>{productDetails?.data?.extra_charges?.price}</span></label>
+                                <span>+
+                                  {/* <i class="bi bi-currency-rupee"></i> */}
+                                  {formatPrice(productDetails?.data?.extra_charges?.price)}</span></label>
                               </div>
                             )
                         )}
@@ -967,10 +967,10 @@ export const ProductDetail = () => {
                               </div>
 
                               <p className="chngd-price mb-0 col-lg-4 col-md-4 col-sm-4 col-4">
-                                <i class="bi bi-currency-rupee"></i>
-                                {productDetails?.data?.turban_charges
+                                {/* <i class="bi bi-currency-rupee"></i> */}
+                                {formatPrice(productDetails?.data?.turban_charges
                                     ? productDetails?.data?.turban_charges?.price
-                                    : "0.00"}
+                                    : "0.00")}
                               </p>
                             </div>
 
@@ -1015,10 +1015,10 @@ export const ProductDetail = () => {
                               </div>
 
                               <p className="chngd-price mb-0 col-lg-4 col-md-4 col-sm-4 col-4">
-                                <i class="bi bi-currency-rupee"></i>
-                                {productDetails?.data?.stole_charges
+                                {/* <i class="bi bi-currency-rupee"></i> */}
+                                {formatPrice(productDetails?.data?.stole_charges
                                     ? productDetails?.data?.stole_charges?.price
-                                    : "0.00"}
+                                    : "0.00")}
                               </p>
                             </div>
                           </div>
@@ -1049,10 +1049,10 @@ export const ProductDetail = () => {
                               </div>
 
                               <p className="chngd-price mb-0 col-lg-4 col-md-4 col-sm-4 col-4">
-                                <i class="bi bi-currency-rupee"></i>
-                                {productDetails?.data?.mojri_charges
+                                {/* <i class="bi bi-currency-rupee"></i> */}
+                                {formatPrice(productDetails?.data?.mojri_charges
                                     ? productDetails?.data?.mojri_charges?.price
-                                    : "0.00"}
+                                    : "0.00")}
                               </p>
 
                               
@@ -1122,8 +1122,11 @@ export const ProductDetail = () => {
 
                     <div className="dowejkrnwerwer d-flex mt-4">
                       <div className="doenwkjriwerwer">
-                        <h4 className="mb-0 me-2">You Pay: <span><i class="fa-solid fa-indian-rupee-sign">
-                          </i>{finalPrice.toFixed(2)}</span>
+                        <h4 className="mb-0 me-2">You Pay: 
+                          <span>
+                          {/* <i class="fa-solid fa-indian-rupee-sign"></i> */}
+                          {formatPrice(finalPrice.toFixed(2))}
+                          </span>
                         </h4>
 
                         <p class="mt-2 mb-0">(Inclusive of all services)</p>
@@ -1579,12 +1582,9 @@ export const ProductDetail = () => {
                                     <div className="fdbdfgdfgdf col-lg-8">
                                       <h4>{matchingProduct.product_name}</h4>
 
-                                      <h5>{new Intl.NumberFormat("en-IN", {
-                                            style: "currency",
-                                            currency: "INR",
-                                            maximumFractionDigits: 0,
-                                            // useGrouping: false, 
-                                          }).format(matchingProduct.selling_price)}</h5>
+                                      <h5>
+                                        {formatPrice(matchingProduct.selling_price)}
+                                      </h5>
                                     </div>
                                   </div>
                                 </div>

@@ -26,9 +26,12 @@ export const Cart = () => {
   const [couponApplied, setCouponApplied] = useState(false);
   // eslint-disable-next-line
   const { selectedCurrency } = useCurrency();
+  const { formatPrice } = useCurrency();
 
   const fetchCartlist = useCallback(async () => {
     if (!token || !selectedCurrency) return;
+
+    console.log(selectedCurrency, 'selectedCurrency');
 
     try {
       const res = await http.post(
@@ -263,19 +266,19 @@ export const Cart = () => {
                                   {cartItemsVal.plus_sizes_charges === '0' ? (
                                     <>
                                       <span className="old-price">
-                                        <i class="bi bi-currency-rupee"></i>
-                                        {cartItemsVal.mrp_price}
+                                        {/* <i class="bi bi-currency-rupee"></i> */}
+                                        {formatPrice(cartItemsVal.mrp_price)}
                                       </span>
                                       <span>
-                                        <i class="bi bi-currency-rupee"></i>
-                                        {cartItemsVal.selling_price} 
+                                        {/* <i class="bi bi-currency-rupee"></i> */}
+                                        {formatPrice(cartItemsVal.selling_price)}
                                       </span>
                                     </>
                                   ) : (
                                     <>
                                       <span>
-                                        <i class="bi bi-currency-rupee"></i>
-                                        {cartItemsVal.plus_sizes_charges} 
+                                        {/* <i class="bi bi-currency-rupee"></i> */}
+                                        {formatPrice(cartItemsVal.plus_sizes_charges)}
                                       </span>
                                     </>
                                   )}
@@ -467,8 +470,8 @@ export const Cart = () => {
                         <td>Product Total</td>
 
                         <td>
-                          <i class="bi bi-currency-rupee"></i>
-                          {totalPrice.total_selling_price}
+                          {/* <i class="bi bi-currency-rupee"></i> */}
+                          {formatPrice(totalPrice.total_selling_price)}
                         </td>
                       </tr>
 
@@ -476,32 +479,33 @@ export const Cart = () => {
                         <td>Total Discount</td>
 
                         <td>
-                          (-) <i class="bi bi-currency-rupee"></i>
-                          {totalPrice.total_discount_price}
+                          (-) 
+                          {/* <i class="bi bi-currency-rupee"></i> */}
+                          {formatPrice(totalPrice.total_discount_price)}
                         </td>
                       </tr>
                       <tr>
                         <td>Add On Charges</td>
 
                         <td>
-                          <i class="bi bi-currency-rupee"></i>
-                          {totalPrice.total_add_on_charges}
+                          {/* <i class="bi bi-currency-rupee"></i> */}
+                          {formatPrice(totalPrice.total_add_on_charges)}
                         </td>
                       </tr>
                       <tr>
                         <td>Shipping</td>
 
                         <td>
-                          <i class="bi bi-currency-rupee"></i>
-                          {totalPrice.shipping_charges}
+                          {/* <i class="bi bi-currency-rupee"></i> */}
+                          {formatPrice(totalPrice.shipping_charges)}
                         </td>
                       </tr>
                       <tr>
                         <td>Cart Total</td>
 
                         <td>
-                          <i class="bi bi-currency-rupee"></i>
-                          {Number(totalPrice.cart_totalPrice) + Number(totalPrice.shipping_charges)}
+                          {/* <i class="bi bi-currency-rupee"></i> */}
+                          {formatPrice(Number(totalPrice.cart_totalPrice) + Number(totalPrice.shipping_charges))}
                         </td>
                       </tr>
                     </tbody>
@@ -655,8 +659,8 @@ export const Cart = () => {
                               <h3>Get Extra</h3>
 
                               <h2 className="mb-0">
-                                <i class="bi bi-currency-rupee"></i>
-                                {parseInt(couponItemsVal.value)} OFF
+                                {/* <i class="bi bi-currency-rupee"></i> */}
+                                {formatPrice(parseInt(couponItemsVal.value))} OFF
                               </h2>
 
                               <small>
@@ -727,8 +731,9 @@ export const Cart = () => {
                     <p>Coupon Discount</p>
 
                     <p>
-                      (-) <i class="bi bi-currency-rupee"></i>
-                      {appliedDiscount}
+                      (-) 
+                      {/* <i class="bi bi-currency-rupee"></i> */}
+                      {formatPrice(appliedDiscount)}
                     </p>
                   </div>
                 )}
@@ -737,8 +742,8 @@ export const Cart = () => {
                   <h4>Total Payable</h4>
 
                   <h4>
-                    <i class="bi bi-currency-rupee"></i>
-                    {(Number(totalPrice.total_selling_price) + Number(totalPrice.total_add_on_charges) + Number(totalPrice.shipping_charges)) - appliedDiscount}
+                    {/* <i class="bi bi-currency-rupee"></i> */}
+                    {formatPrice((Number(totalPrice.total_selling_price) + Number(totalPrice.total_add_on_charges) + Number(totalPrice.shipping_charges)) - appliedDiscount)}
                   </h4>
                   
                 </div>

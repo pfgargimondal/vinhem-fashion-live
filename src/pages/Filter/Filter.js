@@ -9,8 +9,11 @@ import { useCart } from "../../context/CartContext";
 import { useWishlist } from "../../context/WishlistContext";
 import FilterSection from "./FilterSection";
 import { useFilter } from "../../context/FilterContext";
+import { useCurrency } from "../../context/CurrencyContext";
 
 export const Filter = () => {
+
+  const { formatPrice } = useCurrency();
   const { user } = useAuth();
   const location = useLocation();
     // eslint-disable-next-line
@@ -318,12 +321,6 @@ export const Filter = () => {
                                     src={product?.encoded_image_url_1}
                                     alt={product.product_name}
                                   />
-
-                                  {/* <img
-                                    className="first"
-                                    src={product.encoded_image_url_2}
-                                    alt={product.product_name}
-                                  /> */}
                                 </Link>
 
                                 <div className="doikwenirnwekhrwer d-flex position-relative">
@@ -396,14 +393,13 @@ export const Filter = () => {
 
                                 <div className="d-flex flex-wrap align-items-center">
                                   <h5 className="mb-0">
-                                    {new Intl.NumberFormat("en-IN", {
-                                      style: "currency",
-                                      currency: "INR",
-                                      maximumFractionDigits: 0,
-                                    }).format(product.selling_price)}
+                                    {formatPrice(product.selling_price)}
                                   </h5>
 
-                                  <span class="gdfg55 d-flex align-items-center ms-2"><i class="bi bi-currency-rupee"></i> {product.mrp_price}</span>
+                                  <span class="gdfg55 d-flex align-items-center ms-2">
+                                    {/* <i class="bi bi-currency-rupee"></i>  */}
+                                    {formatPrice(product.mrp_price)}
+                                  </span>
 
                                   <span class="fghfgg114 d-flex align-items-center ms-2">{product?.discount}%OFF</span>
                                 </div>

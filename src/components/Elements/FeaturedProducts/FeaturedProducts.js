@@ -3,8 +3,11 @@ import "./FeaturedProducts.css";
 import { useAuth } from "../../../context/AuthContext";
 import { useCart } from "../../../context/CartContext";
 import { useWishlist } from "../../../context/WishlistContext";
+import { useCurrency } from "../../../context/CurrencyContext";
 
 export const FeaturedProducts = ({ featuredProduct }) => {
+
+    const { formatPrice } = useCurrency();
 
     const { user } = useAuth();
     const { addToCart } = useCart();
@@ -20,7 +23,7 @@ export const FeaturedProducts = ({ featuredProduct }) => {
         }
     };
 
-
+    
     return (
         <div className="dfgjhbdfg">
             <div className="images">
@@ -118,15 +121,13 @@ export const FeaturedProducts = ({ featuredProduct }) => {
 
                   <div className="d-flex flex-wrap align-items-center">
                     <h5 className="mb-0">
-                      {new Intl.NumberFormat("en-IN", {
-                        style: "currency",
-                        currency: "INR",
-                        maximumFractionDigits: 0,
-                        // useGrouping: false, 
-                      }).format(featuredProduct.selling_price)}
+                       {formatPrice(featuredProduct.selling_price)}
                     </h5>
 
-                    <span class="gdfg55 d-flex align-items-center ms-2"><i class="bi bi-currency-rupee"></i> {featuredProduct.mrp_price}</span>
+                    <span class="gdfg55 d-flex align-items-center ms-2">
+                      {/* <i class="bi bi-currency-rupee"></i> */}
+                      {formatPrice(featuredProduct.mrp_price)}
+                    </span>
 
                     <span class="fghfgg114 d-flex align-items-center ms-2">{featuredProduct?.discount}%OFF</span>
                   </div>

@@ -5,12 +5,15 @@ import { useAuth } from "../../context/AuthContext";
 import http from "../../http";
 import styles from "./Css/Wishlist.module.css";
 import { useEffect, useState } from "react";
+import { useCurrency } from "../../context/CurrencyContext";
 
 
 export const Wishlist = () => {
 
   const { token } = useAuth();
   const [wishlistItems, setWishlistItems] = useState([]);
+  const { formatPrice } = useCurrency();
+    
 
   useEffect(() => {
     if (!token) return;
@@ -68,13 +71,7 @@ export const Wishlist = () => {
                                                     <div className={`${styles.image} position-relative`}>
                                                         <Link to={`/products/${wishlistProduct.slug}`}>
                                                             <img src={wishlistProduct.encoded_image_url_1} alt="not found" />
-
-                                                            {/* <img className={styles.first} src={wishlistProduct.encoded_image_url_2} alt="not found" /> */}
                                                         </Link>
-
-                                                        {/* <div className={styles.dbgdfhgv}>
-                                                            <button>QUICK ADD</button>
-                                                        </div> */}
 
                                                         <div className={`fdbdfgdfgdf`}>
                                                             <h6><i class="bi me-1 bi-truck"></i> Ships in {wishlistProduct.shipping_time}</h6>
@@ -92,14 +89,13 @@ export const Wishlist = () => {
 
                                                             <div className="d-flex flex-wrap align-items-center">
                                                                 <h5 className="mb-0">
-                                                                {new Intl.NumberFormat("en-IN", {
-                                                                    style: "currency",
-                                                                    currency: "INR",
-                                                                    maximumFractionDigits: 0,
-                                                                }).format(wishlistProduct.selling_price)}
+                                                                    {formatPrice(wishlistProduct.selling_price)}
                                                                 </h5>
 
-                                                                <span class="gdfg55 d-flex align-items-center ms-2"><i class="bi bi-currency-rupee"></i> {wishlistProduct.mrp_price}</span>
+                                                                <span class="gdfg55 d-flex align-items-center ms-2">
+                                                                    {/* <i class="bi bi-currency-rupee"></i>  */}
+                                                                    {formatPrice(wishlistProduct.mrp_price)}
+                                                                </span>
 
                                                                 <span class="fghfgg114 d-flex align-items-center ms-2">{wishlistProduct?.discount}%OFF</span>
                                                             </div>
