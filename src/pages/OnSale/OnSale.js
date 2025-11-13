@@ -665,10 +665,82 @@ export const OnSale = () => {
           </div>
         </div>
       </div>
-
+{/* 
       <div className="lknaknjdoijweewpr py-4 mb-5">
         <div className="container-fluid">
           <img src="./images/On-Sale-Last-Row.jpg" className="img-fluid" alt="" />
+        </div>
+      </div>  */}
+
+      <div className="fbgvdsdfd6568 pt-3 pb-5 mb-4">
+        <div className="container-fluid">
+          <div className="ghbgfgdf sdfwedweeerr">
+            <div className="row align-items-center">
+              <div className="col-lg-3 col-6">
+                <div className="dfnghfd text-center">
+                  <div className="sdhgdfg">
+                    <img src={`${OnSaleDetails?.image_url}/${OnSaleDetails?.data?.section7_image1}`} alt="" />
+                  </div>
+
+                  <div className="cfgncfgb dfgsfeeer">
+                    <h4>{OnSaleDetails?.data?.section7_number1}</h4>
+                  </div>
+
+                  <div className="cfgncfgb">
+                    <h4>{OnSaleDetails?.data?.section7_text1}</h4>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-lg-3 col-6 ps-0">
+                <div className="dfnghfd fsrweerrr text-center">
+                  <div className="sdhgdfg">
+                    <img src={`${OnSaleDetails?.image_url}/${OnSaleDetails?.data?.section7_image2}`} alt="" />
+                  </div>
+
+                  <div className="cfgncfgb dfgsfeeer">
+                    <h4>{OnSaleDetails?.data?.section7_number2}</h4>
+                  </div>
+
+                  <div className="cfgncfgb fsrweerrr">
+                    <h4>{OnSaleDetails?.data?.section7_text2}</h4>
+                  </div>                  
+                </div>
+              </div>
+
+              <div className="col-lg-3 col-6 ps-0">
+                <div className="dfnghfd text-center">
+                  <div className="sdhgdfg">
+                    <img src={`${OnSaleDetails?.image_url}/${OnSaleDetails?.data?.section7_image3}`} alt="" />
+                  </div>
+
+                  <div className="cfgncfgb dfgsfeeer">
+                    <h4>{OnSaleDetails?.data?.section7_number3}</h4>
+                  </div>
+
+                  <div className="cfgncfgb">
+                    <h4>{OnSaleDetails?.data?.section7_text3}</h4>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-lg-3 col-6">
+                <div className="dfnghfd fsrweerrr text-center">
+                  <div className="sdhgdfg">
+                    <img src={`${OnSaleDetails?.image_url}/${OnSaleDetails?.data?.section7_image4}`} alt="" />
+                  </div>
+
+                  <div className="cfgncfgb dfgsfeeer">
+                    <h4>{OnSaleDetails?.data?.section7_number4}</h4>
+                  </div>
+
+                  <div className="cfgncfgb">
+                    <h4>{OnSaleDetails?.data?.section7_text4}</h4>
+                  </div>                  
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

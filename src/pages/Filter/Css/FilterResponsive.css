@@ -13,6 +13,10 @@
         transition: 0.2s ease-in-out;
     }
 
+    .doewnkrhwer{
+        flex: 0 0 auto;
+    }
+
     .res-filtr-nav-hide{
         left: -50rem !important;
         transition: 0.2s ease-in-out;
@@ -41,7 +45,6 @@
         z-index: initial;
         opacity: 1;
         flex: 0 0 auto;
-        margin-right: 4rem;
     }
 
     .dbgdfhgv{
@@ -71,16 +74,22 @@
     .iduhweihriweurwerwer .btn-main {
         flex: 0 0 auto;
     }
+
+    .filtr-wrppr .fdbdfgdfgdf.col-lg-12 .dlksfskjrewrwere.d-flex{
+        position: absolute;
+        right: 5%;
+        top: 5%;
+    }
+
+    .filtr-wrppr .fdbdfgdfgdf.col-lg-12 .dlksfskjrewrwere.d-flex.mt-5{
+        margin-top: 0;
+    }
 }
 
 
 
 
 @media only screen and (max-width: 330px){
-    .doikwenirnwekhrwer {
-        margin-right: 2rem;
-    }
-
     .doikwenirnwekhrwer button {
         width: 2rem;
         height: 2rem;

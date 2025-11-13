@@ -207,6 +207,57 @@
   object-fit: cover;
 }
 
+
+
+
+
+.fbgvdsdfd6568 {
+  width: 100%;
+}
+
+.dfnghfd {
+  border-right: 2px solid #000;
+}
+
+.sdhgdfg img {
+  width: 3rem;
+}
+
+.cfgncfgb h4 {
+  color: #000;
+  font-size: 1rem !important;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.dfgsfeeer h4{
+  font-weight: 600;
+}
+
+.ghbgfgdf .col-lg-3:last-child .dfnghfd{
+  border-right: 0;
+}
+
+
+@media only screen and (max-width: 991px) {
+  .dfnghfd{
+    margin-bottom: 1rem;
+  }
+
+  .col-lg-3.col-6.ps-0{
+    padding-left: calc(var(--bs-gutter-x) * 0.5) !important;
+  }
+
+  .sdfwedweeerr.ghbgfgdf > .row{
+    flex-wrap: wrap;
+  }
+
+  .sdfwedweeerr .fsrweerrr{
+    border-right: 0;
+  }
+}
+
+
 /*end  sales page  css   */
 /*end  sales page  css   */
 /*end  sales page  css   */

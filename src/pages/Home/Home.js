@@ -146,7 +146,7 @@ export const Home = () => {
                           </div>
                         </div>
                         <div className="col-10">
-                          <div className="cfgncfgb">
+                          <div className="cfgncfgb sdfseeerrrr">
                             <h4>{homepage?.data?.h3_text1}</h4>
                           </div>
                         </div>
@@ -164,7 +164,7 @@ export const Home = () => {
                         </div>
                       </div>
                       <div className="col-10">
-                        <div className="cfgncfgb">
+                        <div className="cfgncfgb sdfseeerrrr">
                           <h4>{homepage?.data?.h3_text2}</h4>
                         </div>
                       </div>                    
@@ -182,7 +182,7 @@ export const Home = () => {
                         </div>
                       </div>
                       <div className="col-10">
-                        <div className="cfgncfgb">
+                        <div className="cfgncfgb sdfseeerrrr">
                           <h4>{homepage?.data?.h3_text3}</h4>
                         </div>
                       </div>
@@ -200,7 +200,7 @@ export const Home = () => {
                         </div>
                       </div>
                       <div className="col-10">
-                        <div className="cfgncfgb">
+                        <div className="cfgncfgb sdfseeerrrr">
                           <h4>{homepage?.data?.h3_text4}</h4>
                         </div>
                       </div>
@@ -228,7 +228,7 @@ export const Home = () => {
                     </div>
 
                     <div className="fbsdsdf">
-                      <h4 className="mb-0">
+                      <h4 className="mb-4">
                         <Link to={`${topCategorie.url}`}>{topCategorie.category_name}</Link>
                       </h4>
                     </div>

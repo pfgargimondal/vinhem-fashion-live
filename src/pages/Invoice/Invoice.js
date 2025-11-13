@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import jsPDF from "jspdf";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import html2canvas from "html2canvas";
 import "./Css/Invoice.css";
 import "./Css/InvoiceResponsive.css";
 
-export const Invoice = () => {
+const Invoice = () => {
   const location = useLocation();
   const invoiceRef = useRef();
   const [ready, setReady] = useState(false);
@@ -25,7 +25,7 @@ export const Invoice = () => {
   } = location.state || {};
 
   // ✅ Function to generate + preview PDF automatically
-  const previewPDF = useCallback(async () => {
+  const previewPDF = async () => {
     if (!invoiceRef.current) return;
 
     // Show temporarily to capture
@@ -67,8 +67,8 @@ export const Invoice = () => {
     // ✅ Redirect to previous page after 1s
     setTimeout(() => {
       navigate(-1); // 🔙 goes back to previous route
-    }, 1000);
-  }, [order?.order_id, navigate]);
+    }, 100);
+    };
 
   // ✅ Trigger auto-preview only once when pdfView is true
   useEffect(() => {
@@ -85,7 +85,7 @@ export const Invoice = () => {
     if (pdfView && ready) {
       previewPDF();
     }
-  }, [pdfView, ready, previewPDF]);
+  }, [pdfView, ready]);
 
   return (
     <div id="invoice-content" className="invoice-box my-5">
@@ -208,6 +208,7 @@ export const Invoice = () => {
 
               <tbody>
                 {(() => {
+                  // eslint-disable-next-line
                   const subTotal = userOrderProduct?.reduce(
                     (sum, item) => sum + parseFloat(item.total_price || 0),
                     0
@@ -221,12 +222,22 @@ export const Invoice = () => {
                         const productDetail = getProductDetails?.find(
                           (p) => p.id === item.product_id
                         );
+
                         return (
                           <tr key={item.id}>
-                            <td style={{ border: "1px solid #000", textAlign: "center", padding: "6px" }}>
+                            {/* Quantity */}
+                            <td
+                              style={{
+                                border: "1px solid #000",
+                                borderBottom:0,
+                                textAlign: "center",
+                                padding: "6px",
+                              }}
+                            >
                               {item.quantity}
                             </td>
 
+                            {/* Product details nested table */}
                             <td style={{ border: "1px solid #000", padding: "0" }}>
                               <table style={{ width: "100%", borderCollapse: "collapse" }}>
                                 <tbody>
@@ -254,6 +265,7 @@ export const Invoice = () => {
                               </table>
                             </td>
 
+                            {/* Product price */}
                             <td style={{ border: "1px solid #000", textAlign: "center" }}>
                               ₹{item.total_price}
                             </td>
@@ -261,44 +273,29 @@ export const Invoice = () => {
                         );
                       })}
 
-                      {/* Subtotal */}
+                      {/* ✅ SHIPPING ROW OUTSIDE PRODUCT LOOP */}
                       <tr>
-                        <td colSpan={2} style={{
-                          textAlign: "center",
-                          fontWeight: "bold",
-                          border: "1px solid #000",
-                          padding: "8px"
-                        }}>
-                          Sub Total
+                        <td style={{ border: "1px solid #000", borderTop: "0" }}></td>
+                        <td
+                          style={{
+                            border: "1px solid #000",
+                            borderTop: "0",
+                            textAlign: "center",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Shipping & Duties
                         </td>
-                        <td style={{
-                          textAlign: "center",
-                          border: "1px solid #000",
-                          padding: "8px"
-                        }}>
-                          ₹{subTotal ? subTotal.toFixed(2) : "0.00"}
+                        <td
+                          style={{
+                            border: "1px solid #000",
+                            borderTop: "0",
+                            textAlign: "center",
+                          }}
+                        >
+                          ₹{shipping > 0 ? shipping.toFixed(2) : "Free"}
                         </td>
                       </tr>
-
-                    {/* Shipping */}
-                      <tr>
-                        <td colSpan={2} style={{
-                          textAlign: "center",
-                          fontWeight: "bold",
-                          border: "1px solid #000",
-                          padding: "8px",
-                        }}>
-                          Shipping
-                        </td>
-                        <td style={{
-                          textAlign: "center",
-                          border: "1px solid #000",
-                          padding: "8px"
-                        }}>
-                          ₹{shipping.toFixed(2)}
-                        </td>
-                      </tr>
-
                     </>
                   );
                 })()}
@@ -314,10 +311,10 @@ export const Invoice = () => {
                     0
                   );
 
-                  const billingCountry = order?.billingCountry || "India"; // Fallback
+                  const shippingState = order?.shippingState || "west bengal"; // Fallback
                   let cgst = 0, sgst = 0, igst = 0, totalGst = 0;
 
-                  if (billingCountry === "India") {
+                  if (shippingState === "west bengal") {
                     cgst = subTotal * 0.09;
                     sgst = subTotal * 0.09;
                     totalGst = cgst + sgst;
@@ -329,7 +326,7 @@ export const Invoice = () => {
                   return (
                     <>
                       <tr>
-                        <td rowSpan={billingCountry === "India" ? 3 : 2} style={{
+                        <td rowSpan={shippingState === "west bengal" ? 3 : 2} style={{
                           border: "1px solid #000",
                           textAlign: "center",
                           verticalAlign: "middle",
@@ -339,7 +336,7 @@ export const Invoice = () => {
                           TAX COLLECT
                         </td>
 
-                        {billingCountry === "India" ? (
+                        {shippingState === "west bengal" ? (
                           <>
                             <td style={{ border: "1px solid #000", textAlign: "center" }}>
                               CGST @ 9%
@@ -354,19 +351,19 @@ export const Invoice = () => {
                               IGST @ 18%
                             </td>
                             <td style={{ border: "1px solid #000", textAlign: "center" }}>
-                              ₹{igst.toFixed(2)}
+                              ₹{igst?.toFixed(2)}
                             </td>
                           </>
                         )}
                       </tr>
 
-                      {billingCountry === "India" && (
+                      {shippingState === "west bengal" && (
                         <tr>
                           <td style={{ border: "1px solid #000", textAlign: "center" }}>
                             SGST @ 9%
                           </td>
                           <td style={{ border: "1px solid #000", textAlign: "center" }}>
-                            ₹{sgst.toFixed(2)}
+                            ₹{sgst?.toFixed(2)}
                           </td>
                         </tr>
                       )}
@@ -376,7 +373,7 @@ export const Invoice = () => {
                           Total GST
                         </td>
                         <td style={{ border: "1px solid #000", textAlign: "center" }}>
-                          ₹{totalGst.toFixed(2)}
+                          ₹{totalGst?.toFixed(2)}
                         </td>
                       </tr>
                     </>
@@ -405,7 +402,7 @@ export const Invoice = () => {
                     igst = subTotal * 0.18;
                     totalGst = igst;
                   }
-
+                  // eslint-disable-next-line
                   const grandTotal = subTotal + totalGst + shipping;
 
                   return (
@@ -425,7 +422,7 @@ export const Invoice = () => {
                         fontSize: "1.4rem",
                         fontWeight: "bold",
                       }}>
-                        ₹{grandTotal.toFixed(2)}
+                        ₹{order?.total_order_amount || 0}
                       </td>
                     </tr>
                   );
@@ -485,7 +482,7 @@ export const Invoice = () => {
         </div>
       </div>
 
-  <button onClick={previewPDF}>Preview PDF</button>
+  {/* <button onClick={previewPDF}>Preview PDF</button> */}
 
 
     </div>
