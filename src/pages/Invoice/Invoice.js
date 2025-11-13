@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import jsPDF from "jspdf";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,7 @@ const Invoice = () => {
   } = location.state || {};
 
   // ✅ Function to generate + preview PDF automatically
-  const previewPDF = async () => {
+  const previewPDF = useCallback(async () => {
     if (!invoiceRef.current) return;
 
     // Show temporarily to capture
@@ -68,7 +68,7 @@ const Invoice = () => {
     setTimeout(() => {
       navigate(-1); // 🔙 goes back to previous route
     }, 100);
-    };
+  }, [navigate, order]);
 
   // ✅ Trigger auto-preview only once when pdfView is true
   useEffect(() => {
@@ -85,7 +85,7 @@ const Invoice = () => {
     if (pdfView && ready) {
       previewPDF();
     }
-  }, [pdfView, ready]);
+  }, [pdfView, ready, previewPDF]);
 
   return (
     <div id="invoice-content" className="invoice-box my-5">
