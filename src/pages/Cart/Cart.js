@@ -14,6 +14,8 @@ import { useCurrency } from "../../context/CurrencyContext";
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import { ShippingAddress } from "./Components/ShippingAddress";
+import { BillingAddress } from "./Components/BillingAddress";
 
 export const Cart = () => {
   const navigate = useNavigate();
@@ -181,50 +183,36 @@ export const Cart = () => {
   const handleCart = () => {
     setKey("cart");
   }
-
-
   const handleCouponToggle = () => {
     const html = document.querySelector("html");
 
     html.classList.add("overflow-hidden");
     setCouponModal(!couponModal);
   };
-
-
   const handleCouponClose = () => {
     const html = document.querySelector("html");
 
     html.classList.remove("overflow-hidden");
     setCouponModal(false);
   };
-
-
   const handleAddressToggle = () => {
     const html = document.querySelector("html");
 
     html.classList.add("overflow-hidden");
     setAddressModal(!addressModal);
   };
-
-
-  const handleAddressClose = (e) => {
-    e.preventDefault();
-
+  const handleAddressClose = () => {
     const html = document.querySelector("html");
 
     html.classList.remove("overflow-hidden");
     setAddressModal(false);
   };
-
-
   const handleBillingAddressToggle = () => {
     const html = document.querySelector("html");
 
     html.classList.add("overflow-hidden");
     setAddressModal(!addressModal);
   };
-
-
   const handleBillingAddressClose = (e) => {
     e.preventDefault();
 
@@ -233,6 +221,189 @@ export const Cart = () => {
     html.classList.remove("overflow-hidden");
     setAddressModal(false);
   };
+
+  const [previousAddress, setPreviousAddress] = useState(null);
+  const [shippingAddress, setShippingAddress] = useState(null);
+  const [billingAddress, setBillingAddress] = useState(null);
+  const [sameAsShipping, setSameAsShipping] = useState(true);
+  const [errors, setErrors] = useState({});
+
+  // -------------------------------
+  // 1️⃣ SHIPPING DATA STATE
+  // -------------------------------
+  const [shippingData, setShippingData] = useState({
+    shipping_first_name: "",
+    shipping_last_name: "",
+    shipping_country: "India",
+    shipping_pincode: "",
+    shipping_aptNo: "",
+    shipping_street_address: "",
+    shipping_city: "",
+    shipping_state: "",
+    shipping_mobileCode: "+91",
+    shipping_mobile_number: "",
+    shipping_email: "",
+    shipping_address_as: "",
+    shipping_default_addrss: false,
+  });
+
+  // -------------------------------
+  // 2️⃣ FORMAT DATA (for UI)
+  // -------------------------------
+  const formatShippingAddress = (data) => ({
+    shippingName: `${data.shipping_first_name} ${data.shipping_last_name}`,
+    shippingFullAddress: `${data.shipping_aptNo}, ${data.shipping_street_address}`,
+    shippingCity: data.shipping_city,
+    shippingPinCode: data.shipping_pincode,
+    shippingState: data.shipping_state,
+    shippingCountry: data.shipping_country,
+    shippingNumber: `${data.shipping_mobileCode} ${data.shipping_mobile_number}`,
+    shippingEmail: data.shipping_email,
+    shippingAddressAs: data.shipping_address_as,
+  });
+
+  useEffect(() => {
+    if (!token) return;
+
+    const fetchPreviousAddress = async () => {
+      try {
+        const res = await http.get("/user/get-previous-address", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const apiData = res.data.data;
+
+        if (apiData) {
+          const formatted = formatShippingAddress(apiData);
+          setPreviousAddress(formatted);
+          setShippingAddress(formatted);
+
+          setBillingAddress(formatted); // billing from database
+          setSameAsShipping(false);
+        }
+      } catch (error) {
+        console.error("Failed to fetch address", error);
+      }
+    };
+
+    fetchPreviousAddress();
+  }, [token]);
+
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+
+    let newValue = value;
+
+    if (name === "shipping_mobile_number") {
+      newValue = value.replace(/[^0-9]/g, "");
+    }
+
+    if (name === "shipping_pincode") {
+      newValue = value.replace(/[^0-9]/g, "");
+    }
+
+    setShippingData({
+      ...shippingData,
+      [name]: type === "checkbox" ? checked : newValue,
+    });
+  };
+
+
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!shippingData.shipping_first_name.trim())
+      newErrors.shipping_first_name = "First name is required";
+
+    if (!shippingData.shipping_last_name.trim())
+      newErrors.shipping_last_name = "Last name is required";
+
+    if (!shippingData.shipping_pincode.trim())
+      newErrors.shipping_pincode = "Pin code is required";
+
+    if (!shippingData.shipping_aptNo.trim())
+      newErrors.shipping_aptNo = "Apt / Building is required";
+
+    if (!shippingData.shipping_street_address.trim())
+      newErrors.shipping_street_address = "Street address is required";
+
+    if (!shippingData.shipping_city.trim())
+      newErrors.shipping_city = "City is required";
+
+    if (!shippingData.shipping_state.trim())
+      newErrors.shipping_state = "State is required";
+
+    if (!shippingData.shipping_address_as)
+      newErrors.shipping_address_as = "Select address type";
+
+    if (!shippingData.shipping_mobile_number.trim()) {
+      newErrors.shipping_mobile_number = "Mobile number is required";
+    } else if (!/^[0-9]{10}$/.test(shippingData.shipping_mobile_number)) {
+      newErrors.shipping_mobile_number = "Mobile number must be 10 digits";
+    }
+
+    if (!shippingData.shipping_email.trim()) {
+      newErrors.shipping_email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(shippingData.shipping_email)) {
+      newErrors.shipping_email = "Please enter a valid email address";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // -------------------------------
+  // 6️⃣ SAVE SHIPPING ADDRESS
+  // -------------------------------
+  const handleSaveShipping = (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    const formatted = formatShippingAddress(shippingData);
+    localStorage.setItem("shipping_address", JSON.stringify(formatted));
+    setShippingAddress(formatted);
+    handleAddressClose();
+  };
+
+  // -------------------------------
+  // 7️⃣ LOAD SAVED ADDRESS FROM LOCALSTORAGE
+  // -------------------------------
+  useEffect(() => {
+    const saved = localStorage.getItem("shipping_address");
+    if (saved) {
+      setShippingAddress(JSON.parse(saved));
+    }
+  }, []);
+
+  const handleRemoveAddress = () => {
+    localStorage.removeItem("shipping_address");
+    setShippingAddress(null);
+  };
+
+  const handleEditAddress = () => {
+  if (!shippingAddress) return;
+
+  setShippingData({
+      shipping_first_name: shippingAddress.shippingName.split(" ")[0] || "",
+      shipping_last_name: shippingAddress.shippingName.split(" ")[1] || "",
+      shipping_country: shippingAddress.shippingCountry,
+      shipping_pincode: shippingAddress.shippingPinCode,
+      shipping_aptNo: shippingAddress.shippingFullAddress.split(",")[0] || "",
+      shipping_street_address: shippingAddress.shippingFullAddress.split(",")[1] || "",
+      shipping_city: shippingAddress.shippingCity,
+      shipping_state: shippingAddress.shippingState,
+      shipping_mobileCode: shippingAddress.shippingNumber.split(" ")[0],
+      shipping_mobile_number: shippingAddress.shippingNumber.split(" ")[1],
+      shipping_email: shippingAddress.shippingEmail,
+      shipping_address_as: "HOME",
+    });
+
+    // Open the modal
+    handleAddressToggle();
+  };
+
 
 
   return (
@@ -771,42 +942,11 @@ export const Cart = () => {
 
                                 <p className="mb-0">A valid Indian mobile is required for seamless delivery. Before delivery of this order, you will get a one-time passowrd on +91-7003672926 <span className="ms-1">Edit</span></p>
                               </div>
-
-                              <div className="ojasdaskkse p-4 pb-0">
-                                <div className="sddgeweeeerr d-flex mb-3 align-items-center justify-content-between">
-                                  <h5 className="mb-0">HEMANT BHATTER</h5>
-
-                                  <h6 className="mb-0">HOME</h6>
-                                </div>
-
-                                <label className="cdsfedere">ADDRESS:</label>
-
-                                <p className="col-lg-7 sfvsedweqqwe">703 Uniworld City, Fresco Tower - 5, Flat No. 703, New Town <br /> 24 paraganas north - 700160, West bengal, <br /> India</p>
-
-                                <div className="diwehirwerwer pb-3">
-                                  <div className="sdasfdsreewrer col-lg-5">
-                                    <div className="row">
-                                      <div className="col-lg-6">
-                                        <label className="cdsfedere">CONTACT NO:</label>
-
-                                        <p className="sfvsedweqqwe mb-0">+91-7003672926</p>
-                                      </div>
-
-                                      <div className="col-lg-6">
-                                        <label className="cdsfedere">EMAIL:</label>
-
-                                        <p className="sfvsedweqqwe mb-0">hemantxl@gmail.com</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div className="fihweijrwer d-flex align-items-center justify-content-between py-3">
-                                  <Link to=""><i class="bi me-1 bi-pencil-square"></i> EDIT</Link>
-
-                                  <Link to=""><i class="bi me-1 bi-trash3"></i> REMOVE</Link>
-                                </div>
-                              </div>
+                              {shippingAddress ? (
+                                <ShippingAddress address={shippingAddress} onEdit={handleEditAddress} onRemove={handleRemoveAddress}/>
+                              ) : previousAddress ? (
+                                <ShippingAddress address={previousAddress} onEdit={handleEditAddress} onRemove={handleRemoveAddress}/>
+                              ) : null}
                             </div>
                           </div>
                         </div>
@@ -818,6 +958,14 @@ export const Cart = () => {
                               type="checkbox"
                               value=""
                               id="flexCheckDefault"
+                              checked={sameAsShipping}
+                              onChange={(e) => {
+                                setSameAsShipping(e.target.checked);
+                                if (e.target.checked) {
+                                  // Copy shipping → billing
+                                  setBillingAddress(shippingAddress);
+                                }
+                              }}
                             />
 
                             <label className="form-check-label" htmlFor="flexCheckDefault">
@@ -825,16 +973,19 @@ export const Cart = () => {
                             </label>
                           </div>
 
-                          <div className="iudghweewr">                           
-                            <div className="dinwemojerr mb-4">
-                              <label className="form-label">Billing Address</label>
-
-                              <button onClick={handleBillingAddressToggle} className="btn btn-main bg-transparent text-black d-block w-100 mt-2">
-                                <i class="bi me-1 bi-plus-square"></i>
-                                
-                                ADD BILLING ADDRESS
-                              </button>
-                            </div>
+                          <div className="iudghweewr">       
+                            {!sameAsShipping && (
+                              <div className="dinwemojerr mb-4">
+                                <label className="form-label">Billing Address</label>
+                                <button 
+                                  onClick={handleBillingAddressToggle} 
+                                  className="btn btn-main bg-transparent text-black d-block w-100 mt-2"
+                                >
+                                  <i className="bi me-1 bi-plus-square"></i>
+                                  ADD BILLING ADDRESS
+                                </button>
+                              </div>
+                            )}
 
                             <div className="doiewjirjwer">
                               {/* <div className="delojowerer py-3 px-4 d-flex align-items-center">
@@ -843,41 +994,18 @@ export const Cart = () => {
                                 <p className="mb-0">A valid Indian mobile is required for seamless delivery. Before delivery of this order, you will get a one-time passowrd on +91-7003672926 <span className="ms-1">Edit</span></p>
                               </div> */}
 
-                              <div className="ojasdaskkse p-4 pb-0">
-                                <div className="sddgeweeeerr d-flex mb-3 align-items-center justify-content-between">
-                                  <h5 className="mb-0">HEMANT BHATTER</h5>
+                              {/* 1️⃣ If SAME AS SHIPPING → show shipping details */}
+                              {sameAsShipping && shippingAddress && (
+                                <BillingAddress data={shippingAddress} onEdit={handleBillingAddressToggle}
+                                    onRemove={() => setBillingAddress(null)}/>
+                              )}
 
-                                  <h6 className="mb-0">HOME</h6>
-                                </div>
+                              {/* 2️⃣ If NOT same-as-shipping AND billing address exists in DB */}
+                              {!sameAsShipping && billingAddress && (
+                                <BillingAddress data={billingAddress} onEdit={handleBillingAddressToggle}
+                                    onRemove={() => setBillingAddress(null)}/>
+                              )}
 
-                                <label className="cdsfedere">ADDRESS:</label>
-
-                                <p className="col-lg-7 sfvsedweqqwe">703 Uniworld City, Fresco Tower - 5, Flat No. 703, New Town <br /> 24 paraganas north - 700160, West bengal, <br /> India</p>
-
-                                <div className="diwehirwerwer pb-3">
-                                  <div className="sdasfdsreewrer col-lg-5">
-                                    <div className="row">
-                                      <div className="col-lg-6">
-                                        <label className="cdsfedere">CONTACT NO:</label>
-
-                                        <p className="sfvsedweqqwe mb-0">+91-7003672926</p>
-                                      </div>
-
-                                      <div className="col-lg-6">
-                                        <label className="cdsfedere">EMAIL:</label>
-
-                                        <p className="sfvsedweqqwe mb-0">hemantxl@gmail.com</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div className="fihweijrwer d-flex align-items-center justify-content-between py-3">
-                                  <Link to=""><i class="bi me-1 bi-pencil-square"></i> EDIT</Link>
-
-                                  <Link to=""><i class="bi me-1 bi-trash3"></i> REMOVE</Link>
-                                </div>
-                              </div>
                             </div>
                           </div>
                         </div>
@@ -1519,105 +1647,186 @@ export const Cart = () => {
         <div className="oiasmdjweijrwerwer">
           <div className="dsfgrrdeaeerr mb-2 d-flex align-items-center justify-content-between px-4 pt-3 pb-0">
             <p className="mb-0">ADD SHIPPING ADDRESS</p>
-
             <i onClick={handleAddressClose} class="bi bi-x"></i>
           </div>
 
           <div className="deiwjiurhweijew px-4 pb-4">
-            <form className="asdsefewweee row">
+            <form className="asdsefewweee row" onSubmit={handleSaveShipping}>
               <div className="col-lg-6 mb-4">
-                <input type="text" className="form-control" placeholder="First Name*" />
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  name="shipping_first_name"
+                  placeholder="First Name*" 
+                  value={shippingData.shipping_first_name}
+                  onChange={handleInputChange}
+                />
+                {errors.shipping_first_name && <small className="text-danger">{errors.shipping_first_name}</small>}
               </div>
 
               <div className="col-lg-6 mb-4">
-                <input type="text" className="form-control" placeholder="Last Name*" />
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  name="shipping_last_name"
+                  placeholder="Last Name*"
+                  value={shippingData.shipping_last_name}
+                  onChange={handleInputChange}
+                />
+                {errors.shipping_last_name && <small className="text-danger">{errors.shipping_last_name}</small>}
               </div>
 
               <div className="col-lg-12 mb-4">
-                <select name="" className="form-select h-100" id="">
-                  <option value="">India</option>
+                <select 
+                  name="shipping_country" 
+                  className="form-select h-100"
+                  value={shippingData.shipping_country}
+                  onChange={handleInputChange}
+                >
+                  <option value="India">India</option>
                 </select>
               </div>
 
               <div className="col-lg-12 mb-4">
-                <input type="text" className="form-control" placeholder="Zip / Postal Code*" />
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  name="shipping_pincode" 
+                  placeholder="Zip / Postal Code*"
+                  value={shippingData.shipping_pincode}
+                  onChange={handleInputChange}
+                />
+                {errors.shipping_pincode && <small className="text-danger">{errors.shipping_pincode}</small>}
               </div>
 
               <div className="col-lg-6 mb-4">
-                <input type="text" className="form-control" placeholder="Apt. Building Floor*" />
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  name="shipping_aptNo" 
+                  placeholder="Apt. Building Floor*"
+                  value={shippingData.shipping_aptNo}
+                  onChange={handleInputChange}
+                />
+                {errors.shipping_aptNo && <small className="text-danger">{errors.shipping_aptNo}</small>}
               </div>
 
               <div className="col-lg-6 mb-4">
-                <input type="text" className="form-control" placeholder="Street Address*" />
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  name="shipping_street_address"
+                  placeholder="Street Address*"
+                  value={shippingData.shipping_street_address}
+                  onChange={handleInputChange}
+                />
+                {errors.shipping_street_address && <small className="text-danger">{errors.shipping_street_address}</small>}
               </div>
 
               <div className="col-lg-6 mb-4">
-                <input type="text" className="form-control" placeholder="City*" />
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  name="shipping_city"
+                  placeholder="City*"
+                  value={shippingData.shipping_city}
+                  onChange={handleInputChange}
+                />
+                {errors.shipping_city && <small className="text-danger">{errors.shipping_city}</small>}
               </div>
 
               <div className="col-lg-6 mb-4">
-                <select name="" className="form-select" id="">
+                <select 
+                  name="shipping_state" 
+                  className="form-select"
+                  value={shippingData.shipping_state}
+                  onChange={handleInputChange}
+                >
                   <option value="">State</option>
+                  <option value="West Bengal">West Bengal</option>
                 </select>
+                {errors.shipping_state && <small className="text-danger">{errors.shipping_state}</small>}
               </div>
 
               <div className="col-lg-12 mb-4">
                 <div className="row align-items-center">
                   <div className="col-3">
-                    <div className="ojdeijr">
-                      <input type="text" className="form-control" placeholder="+91" />
-                    </div>                    
+                    <input 
+                      type="text" 
+                      className="form-control"
+                      name="shipping_mobileCode" 
+                      value={shippingData.shipping_mobileCode}
+                      onChange={handleInputChange}
+                    />
                   </div>
 
                   <div className="col-9">
-                    <input type="text" className="form-control" placeholder="Mobile Number of Recipient*" />
+                    <input 
+                      type="text" 
+                      className="form-control" 
+                      name="shipping_mobile_number" 
+                      placeholder="Mobile Number of Recipient*"
+                      value={shippingData.shipping_mobile_number}
+                      onChange={handleInputChange}
+                    />
+                    {errors.shipping_mobile_number && <small className="text-danger">{errors.shipping_mobile_number}</small>}
                   </div>
                 </div>
               </div>
-              
+
+              <div className="col-lg-12 mb-4">
+                <input 
+                  type="email" 
+                  className="form-control" 
+                  name="shipping_email"
+                  placeholder="Email Id*"
+                  value={shippingData.shipping_email}
+                  onChange={handleInputChange}
+                />
+                {errors.shipping_email && <small className="text-danger">{errors.shipping_email}</small>}
+              </div>
+
               <div className="col-lg-12">
                 <div className="dsdgsreefrrr d-flex">
                   <label className="form-label">ADDRESS AS:</label>
 
                   <div className="doweirwerr">
                     <div className="d-flex flex-wrap align-items-center">
-                      <div className="form-check mx-3">
-                        <input className="form-check-input" type="radio" name="dihweihr" id="ddasdasw" value="" />
-                        
-                        <label className="form-check-label" for="ddasdasw">HOME</label>
-                      </div>
-
-                      <div className="form-check mx-3">
-                        <input className="form-check-input" type="radio" name="dihweihr" id="daeerwqe" value="" />
-                        
-                        <label className="form-check-label" for="daeerwqe">OFFICE</label>
-                      </div>
-
-                      <div className="form-check mx-3">
-                        <input className="form-check-input" type="radio" name="dihweihr" id="adeee" value="" />
-                        
-                        <label className="form-check-label" for="adeee">OTHERS</label>
-                      </div>
+                      {["HOME", "OFFICE", "OTHERS"].map((type, index) => (
+                        <div className="form-check mx-3" key={index}>
+                          <input
+                            className="form-check-input"
+                            type="radio"
+                            name="shipping_address_as"
+                            value={type}
+                            checked={shippingData.shipping_address_as === type}
+                            onChange={handleInputChange}
+                          />
+                          <label className="form-check-label">{type}</label>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
+                {errors.shipping_address_as && <small className="text-danger">{errors.shipping_address_as}</small>}
               </div>
 
               <div className="aswdreqwewqe d-flex mt-2 mb-3">
-                <div className="doweirwerr">
-                  <div className="d-flex align-items-center">
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" id="dweqweqee" value="" />
-                      
-                      <label className="form-check-label" for="dweqweqee">Make this as my default shipping address</label>
-                    </div>
-                  </div>
+                <div className="form-check">
+                  <input 
+                    className="form-check-input" 
+                    type="checkbox"
+                    name="shipping_default_addrss"
+                    checked={shippingData.shipping_default_addrss}
+                    onChange={handleInputChange}
+                  />
+                  <label className="form-check-label">Make this as my default shipping address</label>
                 </div>
               </div>
-              
+
               <div className="deiwhrwerwe row align-items-center justify-content-between">
                 <div className="col-lg-5">
-                  <button className="btn btn-main w-100">SAVE</button>
+                  <button type="submit" className="btn btn-main w-100">SAVE</button>
                 </div>
 
                 <div className="col-lg-5">
@@ -1637,7 +1846,7 @@ export const Cart = () => {
       <div className={`${billingAddressModal ? "billing-address-modal" : "billing-address-modal billing-address-modal-hide"} bg-white position-fixed`}>
         <div className="oiasmdjweijrwerwer">
           <div className="dsfgrrdeaeerr mb-2 d-flex align-items-center justify-content-between px-4 pt-3 pb-0">
-            <p className="mb-0">ADD SHIPPING ADDRESS</p>
+            <p className="mb-0">ADD BILLING ADDRESS</p>
 
             <i onClick={handleBillingAddressClose} class="bi bi-x"></i>
           </div>
